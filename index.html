@@ -410,7 +410,8 @@
 
     let overallAbsent = overallTotal - overallPresent;
     let overallPercentage = ((overallPresent / overallTotal) * 100).toFixed(0);
-    let classesNeeded = 18;
+    let required = Math.ceil((0.85 * overallTotal - overallPresent) / (1 - 0.85));
+let classesNeeded = required > 0 ? required : 0;
 
     // Profile info: prefer the SELECTED date's record (so CRT room reflects that day's sheet).
     // Fallback to any record with name info if selected day has no entry for this reg.
@@ -447,13 +448,7 @@
         <span class="chip">CRT Room ${infoStudent["__EMPTY_5"] || "—"}</span>
       </div>
 
-      <div class="progress-container">
-        <div class="progress-bar">
-          <div class="progress-fill" style="width:${overallPercentage}%"></div>
-        </div>
-
-        <div class="progress-text">${overallPercentage}%</div>
-      </div>
+  
     </div>
   </div>
 
@@ -468,7 +463,7 @@
       <div class="box"><div class="num green">${overallPresent}</div><div class="label">Present</div></div>
       <div class="box"><div class="num red">${overallAbsent}</div><div class="label">Absent</div></div>
       <div class="box"><div class="num blue">${overallPercentage}%</div><div class="label">Attendance</div></div>
-      <div class="box"><div class="num blue">${classesNeeded}</div><div class="label">Classes Needed</div></div>
+      <div class="box"><div class="num blue">${classesNeeded}</div><div class="label">Classes Needed for 85% Attendance</div></div>
     `;
   }
 </script>
