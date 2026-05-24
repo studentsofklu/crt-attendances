@@ -1,4 +1,5 @@
 
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -852,9 +853,44 @@
     document.getElementById("studentInfo").innerHTML = `
       <div class="student-card">
         <div class="student-left">
-          <div class="avatar">
-            ${name.split(" ").filter(Boolean).map(x => x[0]).slice(0,2).join("").toUpperCase()}
-          </div>
+${(() => {
+  const firstLetter = name.trim()[0]?.toUpperCase() || "A";
+
+  const colors = {
+A:"#00bcd4", // Cyan
+B:"#2196f3", // Blue
+C:"#00acc1", // Dark Cyan
+D:"#f44336", // Red
+E:"#2ecc71", // Emerald Green
+F:"#ff00ff", // Magenta
+G:"#4caf50", // Green
+H:"#ff4081", // Pink
+I:"#3f51b5", // Indigo
+J:"#00c853", // Jade Green
+K:"#c0ca33", // Olive Green
+L:"#8bc34a", // Lime Green
+M:"#e91e63", // Pink Red
+N:"#1e3a8a", // Navy Blue
+O:"#ff9800", // Orange
+P:"#9c27b0", // Purple
+Q:"#607d8b", // Slate Gray
+R:"#f44336", // Red
+S:"#9e9e9e", // Gray
+T:"#009688", // Teal
+U:"#3f51b5", // Indigo Blue
+V:"#673ab7", // Violet
+W:"#90a4ae", // Blue Gray
+X:"#738276", // Gray Green
+Y:"#fdd835", // Yellow
+Z:"#3949ab"  // Deep Blue
+  };
+
+  return `
+    <div class="avatar" style="background:${colors[firstLetter] || '#2563eb'};">
+      ${name.split(" ").filter(Boolean).map(x => x[0]).slice(0,2).join("").toUpperCase()}
+    </div>
+  `;
+})()}
           <div class="student-info-wrapper">
             <div class="student-name">${name}</div>
             <div class="student-details">
