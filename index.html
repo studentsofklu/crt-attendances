@@ -126,12 +126,14 @@
     font-size:22px;font-weight:700;color:#fff;
     box-shadow:0 8px 20px rgba(37,99,235,.3);
     letter-spacing:.5px;
+    flex-shrink:0;
   }
+  .student-info-wrapper{flex:1;min-width:200px;}
   .student-name{font-size:20px;font-weight:700;color:var(--text);margin-bottom:4px;letter-spacing:-.2px;}
   .student-details{font-size:14px;color:var(--muted);font-weight:500;line-height:1.6;}
   .student-details .chip{
     display:inline-block;padding:2px 10px;border-radius:999px;
-    background:var(--blue-soft);color:var(--primary);font-weight:600;font-size:12px;margin-right:6px;
+    background:var(--blue-soft);color:var(--primary);font-weight:600;font-size:12px;margin-right:6px;margin-bottom:4px;
   }
   .progress-container{display:flex;align-items:center;gap:12px;margin-top:14px;}
   .progress-bar{width:300px;max-width:60vw;height:8px;background:#e2e8f0;border-radius:20px;overflow:hidden;}
@@ -142,12 +144,13 @@
     padding:14px 22px;border-radius:12px;
     font-size:16px;font-weight:700;letter-spacing:1px;
     font-family:'JetBrains Mono',ui-monospace,monospace;
+    flex-shrink:0;
   }
 
   /* Summary */
   .summary{
     margin-top:18px;
-    display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:14px;
+    display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:14px;
   }
   .box{
     background:#fff;border:1px solid var(--border);
@@ -168,43 +171,56 @@
   .blue{color:var(--primary);}
   .label{font-size:14px;font-weight:600;color:var(--muted);letter-spacing:.3px;text-transform:uppercase;}
 
-  /* Dropright (Bootstrap-style) */
+  /* Dropright (Bootstrap-style) - MOBILE OPTIMIZED */
   .btn-group.dropright{
     position:relative;display:inline-flex;margin:24px 0;
+    width:100%;
   }
   .dropdown-toggle{
     padding:14px 22px;border:none;border-radius:14px;
     background:linear-gradient(135deg,var(--primary),var(--primary-dark));
     color:#fff;font-size:16px;font-weight:600;cursor:pointer;
     display:inline-flex;align-items:center;gap:14px;
-    box-shadow:var(--shadow-lg);transition:.2s;min-width:240px;justify-content:space-between;
+    box-shadow:var(--shadow-lg);transition:.2s;width:100%;justify-content:space-between;
   }
   .dropdown-toggle:hover{transform:translateY(-1px);}
   .dropdown-toggle::after{
     content:"";display:inline-block;
-    width:0;height:0;margin-left:6px;
+    width:0;height:0;
     border-top:6px solid transparent;
     border-bottom:6px solid transparent;
     border-left:7px solid #fff;
     transition:transform .25s;
+    flex-shrink:0;
   }
   .btn-group.dropright.show .dropdown-toggle::after{transform:rotate(90deg);}
+  
+  /* Dropdown menu - FULL WIDTH ON MOBILE */
   .btn-group.dropright .dropdown-menu{
-    position:absolute;top:0;left:100%;margin-left:10px;
-    min-width:200px;background:#fff;border:1px solid var(--border);
-    border-radius:14px;padding:6px;display:none;flex-direction:column;gap:2px;
+    position:fixed;bottom:-100%;left:0;right:0;
+    width:100%;background:#fff;border:1px solid var(--border);
+    border-radius:24px 24px 0 0;padding:6px;display:none;flex-direction:column;gap:2px;
     box-shadow:0 20px 40px rgba(15,23,42,.12);
     z-index:100;max-height:340px;overflow-y:auto;
+    animation:slideUp .3s ease;
   }
+  @keyframes slideUp{from{bottom:-100%;}to{bottom:0;}}
+  
   .btn-group.dropright.show .dropdown-menu{display:flex;}
   .dropdown-item{
     padding:12px 14px;border-radius:10px;cursor:pointer;
     font-size:14px;font-weight:600;transition:.15s;color:var(--text);
+    margin:0 8px;
   }
   .dropdown-item:hover,.dropdown-item.active{background:var(--blue-soft);color:var(--primary);}
 
-  /* Slots */
-  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:14px;}
+  /* Slots - RESPONSIVE GRID */
+  .grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+    gap:12px;
+    margin-top:20px;
+  }
   .slot{
     padding:20px 16px;border-radius:14px;text-align:center;
     border:1.5px solid;transition:.2s;
@@ -218,22 +234,289 @@
   .absent .status{color:var(--red);}
   .word{font-size:14px;font-weight:700;color:var(--text);text-transform:uppercase;letter-spacing:.5px;}
 
-  @media (max-width:640px){
-    .reg-box{width:100%;text-align:center;}
-    .progress-bar{width:240px;}
-    .num{font-size:36px;}
-    .btn-group.dropright .dropdown-menu{
-      position:static;margin-left:0;margin-top:8px;width:100%;
+  /* MOBILE RESPONSIVE STYLES */
+  @media (max-width:768px){
+    body{
+      padding:16px 12px 48px;
     }
-    .btn-group.dropright{width:100%;}
-    .dropdown-toggle{width:100%;}
+    .title h1{
+      font-size:32px;
+    }
+    .card{
+      padding:16px;
+      margin-bottom:16px;
+    }
+    input{
+      padding:16px 16px 16px 48px;
+      font-size:16px;
+    }
+    .input-wrap svg{
+      width:20px;height:20px;
+      left:14px;
+    }
+    .clear-btn{
+      width:100%;
+      padding:12px 16px;
+      margin-top:12px;
+      font-size:14px;
+    }
+    
+    /* Mobile Student Card */
+    .student-card{
+      flex-direction:column;
+      align-items:flex-start;
+      gap:14px;
+      padding:16px;
+    }
+    .student-left{
+      width:100%;
+      flex-direction:row;
+    }
+    .student-info-wrapper{
+      flex:1;
+      width:100%;
+    }
+    .student-details .chip{
+      display:block;
+      margin:4px 0;
+      margin-right:0;
+    }
+    .avatar{
+      width:56px;
+      height:56px;
+      font-size:20px;
+    }
+    .student-name{
+      font-size:18px;
+    }
+    .reg-box{
+      width:100%;
+      text-align:center;
+      padding:12px 16px;
+      font-size:14px;
+    }
+    
+    /* Mobile Summary Grid */
+    .summary{
+      grid-template-columns:repeat(2,1fr);
+      gap:12px;
+      margin-top:14px;
+    }
+    .box{
+      padding:18px 12px;
+    }
+    .num{
+      font-size:32px;
+      margin-bottom:8px;
+    }
+    .label{
+      font-size:12px;
+    }
+    
+    /* Mobile Dropdown */
+    .btn-group.dropright{
+      margin:16px 0;
+      width:100%;
+    }
+    .dropdown-toggle{
+      width:100%;
+      padding:14px 16px;
+      font-size:15px;
+      gap:10px;
+    }
+    .dropdown-toggle::after{
+      border-top:5px solid transparent;
+      border-bottom:5px solid transparent;
+      border-left:6px solid #fff;
+    }
+    .btn-group.dropright .dropdown-menu{
+      position:fixed;
+      bottom:0;
+      left:0;
+      right:0;
+      width:100%;
+      max-height:50vh;
+      border-radius:24px 24px 0 0;
+    }
+    .dropdown-item{
+      padding:14px 12px;
+      font-size:15px;
+      margin:2px 4px;
+    }
+    
+    /* Mobile Attendance Grid */
+    .grid{
+      grid-template-columns:repeat(2,1fr);
+      gap:10px;
+      margin-top:14px;
+    }
+    .slot{
+      padding:16px 12px;
+      border-radius:12px;
+    }
+    .time{
+      font-size:12px;
+      margin-bottom:8px;
+    }
+    .status{
+      font-size:32px;
+      margin-bottom:4px;
+    }
+    .word{
+      font-size:12px;
+    }
+  }
+
+  @media (max-width:480px){
+    body{
+      padding:12px 10px 40px;
+    }
+    .container{
+      max-width:100%;
+    }
+    .title{
+      margin:0 0 20px;
+    }
+    .title h1{
+      font-size:28px;
+      letter-spacing:-0.5px;
+    }
+    .title p{
+      font-size:14px;
+      margin-top:6px;
+    }
+    .card{
+      padding:14px;
+      margin-bottom:12px;
+    }
+    input{
+      padding:14px 14px 14px 44px;
+      font-size:15px;
+      border-radius:12px;
+    }
+    .input-wrap svg{
+      width:18px;height:18px;
+      left:12px;
+    }
+    #error{
+      margin-top:10px;
+      padding:10px 12px;
+      font-size:13px;
+      border-radius:10px;
+    }
+    .clear-btn{
+      width:100%;
+      padding:11px 14px;
+      font-size:13px;
+      border-radius:10px;
+      margin-top:10px;
+    }
+    
+    /* Mobile Student Card (Small) */
+    .student-card{
+      padding:12px;
+      gap:10px;
+    }
+    .avatar{
+      width:48px;
+      height:48px;
+      font-size:18px;
+    }
+    .student-name{
+      font-size:16px;
+      margin-bottom:2px;
+    }
+    .student-details{
+      font-size:12px;
+      line-height:1.4;
+    }
+    .student-details .chip{
+      padding:2px 8px;
+      font-size:10px;
+      margin:2px 0;
+    }
+    .reg-box{
+      width:100%;
+      padding:10px 12px;
+      font-size:13px;
+      letter-spacing:0.5px;
+    }
+    
+    /* Mobile Summary Grid (Small) */
+    .summary{
+      grid-template-columns:repeat(2,1fr);
+      gap:10px;
+      margin-top:12px;
+    }
+    .box{
+      padding:14px 10px;
+      border-radius:12px;
+    }
+    .num{
+      font-size:28px;
+      margin-bottom:6px;
+    }
+    .label{
+      font-size:11px;
+      letter-spacing:0;
+    }
+    
+    /* Mobile Dropdown (Small) */
+    .btn-group.dropright{
+      margin:12px 0;
+      width:100%;
+    }
+    .dropdown-toggle{
+      width:100%;
+      padding:12px 14px;
+      font-size:14px;
+      gap:8px;
+      border-radius:12px;
+    }
+    .dropdown-toggle::after{
+      border-top:4px solid transparent;
+      border-bottom:4px solid transparent;
+      border-left:5px solid #fff;
+    }
+    .btn-group.dropright .dropdown-menu{
+      max-height:45vh;
+      border-radius:20px 20px 0 0;
+    }
+    .dropdown-item{
+      padding:12px 10px;
+      font-size:13px;
+      margin:1px 3px;
+      border-radius:8px;
+    }
+    
+    /* Mobile Attendance Grid (Small) */
+    .grid{
+      grid-template-columns:repeat(2,1fr);
+      gap:8px;
+      margin-top:12px;
+    }
+    .slot{
+      padding:14px 10px;
+      border-radius:10px;
+      border-width:1.2px;
+    }
+    .time{
+      font-size:11px;
+      margin-bottom:6px;
+    }
+    .status{
+      font-size:28px;
+      margin-bottom:3px;
+    }
+    .word{
+      font-size:11px;
+    }
   }
 </style>
 </head>
 <body>
   <div class="container">
     <div class="title">
-     
       <h1>CRT Attendance Portal</h1>
       <p>11.05.2026 — 23.05.2026</p>
     </div>
@@ -252,7 +535,7 @@
         <div id="studentInfo"></div>
         <div id="summary" class="summary"></div>
 
-        <!-- Bootstrap-style dropright -->
+        <!-- Bootstrap-style dropright - MOBILE OPTIMIZED -->
         <div class="btn-group dropright" id="dateDropdown">
           <button type="button" class="dropdown-toggle" onclick="toggleDropdown(event)" aria-haspopup="true" aria-expanded="false">
             <span id="selectedDate">23.05.2026</span>
@@ -411,10 +694,9 @@
     let overallAbsent = overallTotal - overallPresent;
     let overallPercentage = ((overallPresent / overallTotal) * 100).toFixed(0);
     let required = Math.ceil((0.85 * overallTotal - overallPresent) / (1 - 0.85));
-let classesNeeded = required > 0 ? required : 0;
+    let classesNeeded = required > 0 ? required : 0;
 
-    // Profile info: prefer the SELECTED date's record (so CRT room reflects that day's sheet).
-    // Fallback to any record with name info if selected day has no entry for this reg.
+    // Profile info: prefer the SELECTED date's record
     let infoStudent = student;
     if (!infoStudent || !infoStudent["__EMPTY"]) {
       Object.keys(allData).forEach(day => {
@@ -432,58 +714,52 @@ let classesNeeded = required > 0 ? required : 0;
 
     document.getElementById("studentInfo").innerHTML = `
       <div class="student-card">
-  <div class="student-left">
-
-    <div class="avatar">
-      ${name.split(" ").filter(Boolean).map(x => x[0]).slice(0,2).join("").toUpperCase()}
-    </div>
-
-    <div>
-      <div class="student-name">${name}</div>
-
-      <div class="student-details">
-        <span class="chip">DEP ${infoStudent["__EMPTY_2"] || "—"}</span>
-        <span class="chip">Cluster ${infoStudent["__EMPTY_3"] || "—"}</span>
-        <span class="chip">CRT SEC ${infoStudent["__EMPTY_4"] || "—"}</span>
-        <span class="chip">CRT Room ${infoStudent["__EMPTY_5"] || "—"}</span>
+        <div class="student-left">
+          <div class="avatar">
+            ${name.split(" ").filter(Boolean).map(x => x[0]).slice(0,2).join("").toUpperCase()}
+          </div>
+          <div class="student-info-wrapper">
+            <div class="student-name">${name}</div>
+            <div class="student-details">
+              <span class="chip">DEP ${infoStudent["__EMPTY_2"] || "—"}</span>
+              <span class="chip">Cluster ${infoStudent["__EMPTY_3"] || "—"}</span>
+              <span class="chip">CRT SEC ${infoStudent["__EMPTY_4"] || "—"}</span>
+              <span class="chip">CRT Room ${infoStudent["__EMPTY_5"] || "—"}</span>
+            </div>
+          </div>
+        </div>
+        <div class="reg-box">
+          ${infoStudent["__EMPTY_6"] || "—"}
+        </div>
       </div>
-
-  
-    </div>
-  </div>
-
-  <div class="reg-box">
-    ${infoStudent["__EMPTY_6"] || "—"}
-  </div>
-</div>
     `;
 
-document.getElementById("summary").innerHTML = `
-  <div class="box">
-    <div class="num" style="color:#2563eb;">${overallTotal}</div>
-    <div class="label">Total Classes</div>
-  </div>
+    document.getElementById("summary").innerHTML = `
+      <div class="box">
+        <div class="num" style="color:#2563eb;">${overallTotal}</div>
+        <div class="label">Total Classes</div>
+      </div>
 
-  <div class="box">
-    <div class="num" style="color:#16a34a;">${overallPresent}</div>
-    <div class="label">Present</div>
-  </div>
+      <div class="box">
+        <div class="num" style="color:#16a34a;">${overallPresent}</div>
+        <div class="label">Present</div>
+      </div>
 
-  <div class="box">
-    <div class="num" style="color:#dc2626;">${overallAbsent}</div>
-    <div class="label">Absent</div>
-  </div>
+      <div class="box">
+        <div class="num" style="color:#dc2626;">${overallAbsent}</div>
+        <div class="label">Absent</div>
+      </div>
 
-  <div class="box">
-    <div class="num" style="color:#9333ea;">${overallPercentage}%</div>
-    <div class="label">Attendance</div>
-  </div>
+      <div class="box">
+        <div class="num" style="color:#9333ea;">${overallPercentage}%</div>
+        <div class="label">Attendance</div>
+      </div>
 
-  <div class="box">
-    <div class="num" style="color:#f59e0b;">${classesNeeded}</div>
-    <div class="label">Classes Needed for 85% Attendance</div>
-  </div>
-`;
+      <div class="box">
+        <div class="num" style="color:#f59e0b;">${classesNeeded}</div>
+        <div class="label">Classes Needed</div>
+      </div>
+    `;
   }
 </script>
 </body>
