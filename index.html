@@ -8,7 +8,6 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
 <style>
-  /* CSS Variables for Theme Colors and Spacing */
   :root{
     --bg:#f6f8fb;
     --bg-grad:radial-gradient(1200px 600px at 10% -10%, #e0e7ff 0%, transparent 60%),
@@ -31,7 +30,6 @@
     --radius:18px;
   }
 
-  /* Global Reset and Base Styles */
   *{
     margin:0;
     padding:0;
@@ -39,12 +37,10 @@
     font-family:'Inter',system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
   }
 
-  /* HTML and Body Base Styles */
   html,body{
     height:100%;
   }
 
-  /* Body Background and Layout */
   body{
     background:var(--bg);
     background-image:var(--bg-grad);
@@ -54,19 +50,16 @@
     -webkit-font-smoothing:antialiased;
   }
 
-  /* Container Max Width */
   .container{
     max-width:1240px;
     margin:auto;
   }
 
-  /* ===== HEADER STYLES ===== */
   .title{
     text-align:center;
     margin:8px 0 28px;
   }
 
-  /* Badge for Status Indicator */
   .badge{
     display:inline-flex;
     align-items:center;
@@ -82,7 +75,6 @@
     margin-bottom:14px;
   }
 
-  /* Badge Dot Indicator */
   .badge::before{
     content:"";
     width:7px;
@@ -92,10 +84,8 @@
     box-shadow:0 0 0 4px rgba(37,99,235,.15);
   }
 
-  /* Title Heading */
   .title h1{
     font-size:clamp(28px,4.2vw,44px);
-    color:var(--text);
     font-weight:800;
     letter-spacing:-1px;
     background:linear-gradient(90deg,#0b1220,#2563eb);
@@ -104,7 +94,6 @@
     color:transparent;
   }
 
-  /* Title Subtitle */
   .title p{
     margin-top:8px;
     font-size:16px;
@@ -112,7 +101,6 @@
     font-weight:500;
   }
 
-  /* ===== CARD STYLES ===== */
   .card{
     background:var(--card);
     padding:22px;
@@ -122,12 +110,10 @@
     margin-bottom:20px;
   }
 
-  /* ===== INPUT STYLES ===== */
   .input-wrap{
     position:relative;
   }
 
-  /* Search Icon in Input */
   .input-wrap svg{
     position:absolute;
     left:18px;
@@ -139,7 +125,6 @@
     pointer-events:none;
   }
 
-  /* Input Field */
   input{
     width:100%;
     padding:18px 18px 18px 52px;
@@ -154,21 +139,18 @@
     letter-spacing:.5px;
   }
 
-  /* Input Placeholder */
   input::placeholder{
     color:#94a3b8;
     font-weight:500;
     letter-spacing:.3px;
   }
 
-  /* Input Focus State */
   input:focus{
     border-color:var(--primary);
     background:#fff;
     box-shadow:0 0 0 4px rgba(37,99,235,.12);
   }
 
-  /* Clear Button */
   .clear-btn{
     margin-top:14px;
     padding:12px 22px;
@@ -183,13 +165,11 @@
     transition:.2s;
   }
 
-  /* Clear Button Hover */
   .clear-btn:hover{
     background:var(--red);
     color:#fff;
   }
 
-  /* Error Message Container */
   #error{
     margin-top:14px;
     padding:12px 16px;
@@ -202,25 +182,16 @@
     display:none;
   }
 
-  /* Result Container Animation */
   #result{
     display:none;
     animation:fadeIn .4s ease;
   }
 
-  /* Fade In Animation */
   @keyframes fadeIn{
-    from{
-      opacity:0;
-      transform:translateY(6px);
-    }
-    to{
-      opacity:1;
-      transform:none;
-    }
+    from{ opacity:0; transform:translateY(6px); }
+    to{ opacity:1; transform:none; }
   }
 
-  /* ===== STUDENT CARD STYLES ===== */
   .student-card{
     background:linear-gradient(135deg,#ffffff 0%,#f8fafc 100%);
     border:1px solid var(--border);
@@ -233,7 +204,6 @@
     flex-wrap:wrap;
   }
 
-  /* Student Left Container */
   .student-left{
     display:flex;
     align-items:center;
@@ -241,7 +211,6 @@
     flex-wrap:wrap;
   }
 
-  /* Avatar Circle */
   .avatar{
     width:64px;
     height:64px;
@@ -258,13 +227,11 @@
     flex-shrink:0;
   }
 
-  /* Student Info Wrapper */
   .student-info-wrapper{
     flex:1;
     min-width:200px;
   }
 
-  /* Student Name */
   .student-name{
     font-size:20px;
     font-weight:700;
@@ -273,7 +240,6 @@
     letter-spacing:-.2px;
   }
 
-  /* Student Details Container */
   .student-details{
     font-size:14px;
     color:var(--muted);
@@ -281,7 +247,6 @@
     line-height:1.6;
   }
 
-  /* Info Chip Tags */
   .student-details .chip{
     display:inline-block;
     padding:2px 10px;
@@ -294,40 +259,6 @@
     margin-bottom:4px;
   }
 
-  /* Progress Container */
-  .progress-container{
-    display:flex;
-    align-items:center;
-    gap:12px;
-    margin-top:14px;
-  }
-
-  /* Progress Bar Background */
-  .progress-bar{
-    width:300px;
-    max-width:60vw;
-    height:8px;
-    background:#e2e8f0;
-    border-radius:20px;
-    overflow:hidden;
-  }
-
-  /* Progress Bar Fill */
-  .progress-fill{
-    height:100%;
-    background:linear-gradient(90deg,#16a34a,#22c55e);
-    border-radius:20px;
-    transition:width .8s ease;
-  }
-
-  /* Progress Text */
-  .progress-text{
-    font-size:16px;
-    font-weight:700;
-    color:var(--green);
-  }
-
-  /* Registration Box */
   .reg-box{
     background:#0b1220;
     color:#fff;
@@ -340,7 +271,6 @@
     flex-shrink:0;
   }
 
-  /* ===== SUMMARY BOXES ===== */
   .summary{
     margin-top:18px;
     display:grid;
@@ -348,7 +278,6 @@
     gap:14px;
   }
 
-  /* Summary Box */
   .box{
     background:#fff;
     border:1px solid var(--border);
@@ -361,7 +290,6 @@
     overflow:hidden;
   }
 
-  /* Box Top Border on Hover */
   .box::before{
     content:"";
     position:absolute;
@@ -372,18 +300,15 @@
     transition:.25s;
   }
 
-  /* Box Hover Effect */
   .box:hover{
     transform:translateY(-3px);
     box-shadow:var(--shadow-md);
   }
 
-  /* Box Hover Top Border */
   .box:hover::before{
     opacity:1;
   }
 
-  /* Box Number */
   .num{
     font-size:44px;
     font-weight:800;
@@ -392,22 +317,10 @@
     margin-bottom:10px;
   }
 
-  /* Green Text Color */
-  .green{
-    color:var(--green);
-  }
+  .green{ color:var(--green); }
+  .red{ color:var(--red); }
+  .blue{ color:var(--primary); }
 
-  /* Red Text Color */
-  .red{
-    color:var(--red);
-  }
-
-  /* Blue Text Color */
-  .blue{
-    color:var(--primary);
-  }
-
-  /* Box Label */
   .label{
     font-size:14px;
     font-weight:600;
@@ -416,15 +329,14 @@
     text-transform:uppercase;
   }
 
-  /* ===== DESKTOP DROPDOWN (1024px and above) ===== */
-  .btn-group.dropright{
-    position:relative;
-    display:inline-flex;
+  /* ===== DATE PICKER — DESKTOP: right-side dropdown ===== */
+  .date-picker-wrap{
     margin:24px 0;
+    position:relative;
+    display:inline-block;
   }
 
-  /* Dropdown Toggle Button */
-  .dropdown-toggle{
+  .date-toggle{
     padding:14px 22px;
     border:none;
     border-radius:14px;
@@ -442,14 +354,11 @@
     justify-content:space-between;
   }
 
-  /* Dropdown Toggle Hover */
-  .dropdown-toggle:hover{
+  .date-toggle:hover{
     transform:translateY(-1px);
   }
 
-  /* Dropdown Arrow Icon */
-  .dropdown-toggle::after{
-    content:"";
+  .date-toggle .arrow{
     display:inline-block;
     width:0;
     height:0;
@@ -460,13 +369,12 @@
     flex-shrink:0;
   }
 
-  /* Dropdown Arrow Rotation */
-  .btn-group.dropright.show .dropdown-toggle::after{
+  .date-picker-wrap.open .date-toggle .arrow{
     transform:rotate(90deg);
   }
 
-  /* Desktop Dropdown Menu - Right Positioned */
-  .btn-group.dropright .dropdown-menu{
+  /* Desktop dropdown — right side */
+  .date-dropdown{
     position:absolute;
     top:0;
     left:100%;
@@ -485,13 +393,11 @@
     overflow-y:auto;
   }
 
-  /* Desktop Dropdown Menu Show */
-  .btn-group.dropright.show .dropdown-menu{
+  .date-picker-wrap.open .date-dropdown{
     display:flex;
   }
 
-  /* Dropdown Item */
-  .dropdown-item{
+  .date-item{
     padding:12px 14px;
     border-radius:10px;
     cursor:pointer;
@@ -499,10 +405,11 @@
     font-weight:600;
     transition:.15s;
     color:var(--text);
+    white-space:nowrap;
   }
 
-  /* Dropdown Item Hover and Active */
-  .dropdown-item:hover,.dropdown-item.active{
+  .date-item:hover,
+  .date-item.active{
     background:var(--blue-soft);
     color:var(--primary);
   }
@@ -515,7 +422,6 @@
     margin-top:20px;
   }
 
-  /* Attendance Slot */
   .slot{
     padding:20px 16px;
     border-radius:14px;
@@ -524,25 +430,14 @@
     transition:.2s;
   }
 
-  /* Slot Hover */
   .slot:hover{
     transform:translateY(-2px);
     box-shadow:var(--shadow-sm);
   }
 
-  /* Present Slot */
-  .present{
-    background:var(--green-soft);
-    border-color:#86efac;
-  }
+  .present{ background:var(--green-soft); border-color:#86efac; }
+  .absent{ background:var(--red-soft); border-color:#fca5a5; }
 
-  /* Absent Slot */
-  .absent{
-    background:var(--red-soft);
-    border-color:#fca5a5;
-  }
-
-  /* Slot Time */
   .time{
     font-size:13px;
     color:var(--muted);
@@ -551,7 +446,6 @@
     letter-spacing:.3px;
   }
 
-  /* Slot Status Letter */
   .status{
     font-size:36px;
     font-weight:800;
@@ -559,17 +453,9 @@
     letter-spacing:-1px;
   }
 
-  /* Present Status Color */
-  .present .status{
-    color:var(--green);
-  }
+  .present .status{ color:var(--green); }
+  .absent .status{ color:var(--red); }
 
-  /* Absent Status Color */
-  .absent .status{
-    color:var(--red);
-  }
-
-  /* Slot Word */
   .word{
     font-size:14px;
     font-weight:700;
@@ -578,242 +464,65 @@
     letter-spacing:.5px;
   }
 
-  /* ===== TABLET & LAPTOP RESPONSIVE (1024px and below) ===== */
+  /* ===== TABLET ===== */
   @media (max-width:1024px){
-    body{
-      padding:20px 14px 48px;
-    }
-
-    .title h1{
-      font-size:36px;
-    }
-
-    .card{
-      padding:18px;
-      margin-bottom:18px;
-    }
-
-    input{
-      padding:16px 16px 16px 50px;
-      font-size:16px;
-    }
-
-    .input-wrap svg{
-      width:20px;
-      height:20px;
-      left:16px;
-    }
-
-    .clear-btn{
-      padding:12px 18px;
-      font-size:14px;
-    }
-
-    .student-card{
-      flex-direction:row;
-      gap:16px;
-    }
-
-    .student-left{
-      flex:1;
-    }
-
-    .avatar{
-      width:56px;
-      height:56px;
-      font-size:20px;
-    }
-
-    .student-name{
-      font-size:18px;
-    }
-
-    .student-details .chip{
-      display:inline-block;
-      margin-right:6px;
-      margin-bottom:4px;
-    }
-
-    .reg-box{
-      padding:12px 18px;
-      font-size:14px;
-    }
-
-    .summary{
-      grid-template-columns:repeat(3,1fr);
-      gap:12px;
-    }
-
-    .box{
-      padding:20px 14px;
-    }
-
-    .num{
-      font-size:40px;
-    }
-
-    .label{
-      font-size:13px;
-    }
-
-    .btn-group.dropright{
-      margin:20px 0;
-    }
-
-    .dropdown-toggle{
-      padding:13px 18px;
-      font-size:15px;
-      gap:10px;
-      min-width:220px;
-    }
-
-    .grid{
-      grid-template-columns:repeat(4,1fr);
-      gap:10px;
-    }
-
-    .slot{
-      padding:18px 14px;
-    }
-
-    .time{
-      font-size:12px;
-    }
-
-    .status{
-      font-size:32px;
-    }
+    body{ padding:20px 14px 48px; }
+    .title h1{ font-size:36px; }
+    .card{ padding:18px; margin-bottom:18px; }
+    input{ padding:16px 16px 16px 50px; font-size:16px; }
+    .input-wrap svg{ width:20px; height:20px; left:16px; }
+    .clear-btn{ padding:12px 18px; font-size:14px; }
+    .student-card{ flex-direction:row; gap:16px; }
+    .student-left{ flex:1; }
+    .avatar{ width:56px; height:56px; font-size:20px; }
+    .student-name{ font-size:18px; }
+    .reg-box{ padding:12px 18px; font-size:14px; }
+    .summary{ grid-template-columns:repeat(3,1fr); gap:12px; }
+    .box{ padding:20px 14px; }
+    .num{ font-size:40px; }
+    .label{ font-size:13px; }
+    .date-picker-wrap{ margin:20px 0; }
+    .date-toggle{ padding:13px 18px; font-size:15px; gap:10px; min-width:220px; }
+    .grid{ grid-template-columns:repeat(4,1fr); gap:10px; }
+    .slot{ padding:18px 14px; }
+    .time{ font-size:12px; }
+    .status{ font-size:32px; }
   }
 
-  /* ===== MOBILE (768px and below) - BOTTOM MODAL DROPDOWN ===== */
+  /* ===== MOBILE — inline pill grid replaces modal/dropdown ===== */
   @media (max-width:768px){
-    body{
-      padding:16px 12px 48px;
-    }
+    body{ padding:16px 12px 48px; }
+    .title h1{ font-size:32px; }
+    .title p{ font-size:14px; }
+    .card{ padding:16px; margin-bottom:16px; }
+    input{ padding:16px 16px 16px 48px; font-size:16px; border-radius:12px; }
+    .input-wrap svg{ width:20px; height:20px; left:14px; }
+    .clear-btn{ width:100%; padding:12px 16px; margin-top:12px; font-size:14px; border-radius:10px; }
+    #error{ margin-top:10px; padding:10px 12px; font-size:13px; border-radius:10px; }
 
-    .title h1{
-      font-size:32px;
-    }
+    .student-card{ flex-direction:column; align-items:flex-start; gap:12px; padding:14px; }
+    .student-left{ width:100%; flex-direction:row; gap:14px; }
+    .student-info-wrapper{ flex:1; width:100%; }
+    .student-details .chip{ display:block; margin:3px 0; padding:3px 8px; font-size:11px; }
+    .avatar{ width:52px; height:52px; font-size:18px; flex-shrink:0; }
+    .student-name{ font-size:17px; margin-bottom:3px; }
+    .student-details{ font-size:13px; line-height:1.5; }
+    .reg-box{ width:100%; text-align:center; padding:12px 14px; font-size:13px; letter-spacing:.5px; margin-top:4px; }
 
-    .title p{
-      font-size:14px;
-    }
+    .summary{ grid-template-columns:repeat(2,1fr); gap:12px; margin-top:12px; }
+    .box{ padding:16px 12px; border-radius:12px; }
+    .num{ font-size:32px; margin-bottom:6px; }
+    .label{ font-size:12px; letter-spacing:0; }
 
-    .card{
-      padding:16px;
-      margin-bottom:16px;
-    }
-
-    input{
-      padding:16px 16px 16px 48px;
-      font-size:16px;
-      border-radius:12px;
-    }
-
-    .input-wrap svg{
-      width:20px;
-      height:20px;
-      left:14px;
-    }
-
-    .clear-btn{
-      width:100%;
-      padding:12px 16px;
-      margin-top:12px;
-      font-size:14px;
-      border-radius:10px;
-    }
-
-    #error{
-      margin-top:10px;
-      padding:10px 12px;
-      font-size:13px;
-      border-radius:10px;
-    }
-
-    /* Mobile Student Card */
-    .student-card{
-      flex-direction:column;
-      align-items:flex-start;
-      gap:12px;
-      padding:14px;
-    }
-
-    .student-left{
-      width:100%;
-      flex-direction:row;
-      gap:14px;
-    }
-
-    .student-info-wrapper{
-      flex:1;
-      width:100%;
-    }
-
-    .student-details .chip{
-      display:block;
-      margin:3px 0;
-      margin-right:0;
-      padding:3px 8px;
-      font-size:11px;
-    }
-
-    .avatar{
-      width:52px;
-      height:52px;
-      font-size:18px;
-      flex-shrink:0;
-    }
-
-    .student-name{
-      font-size:17px;
-      margin-bottom:3px;
-    }
-
-    .student-details{
-      font-size:13px;
-      line-height:1.5;
-    }
-
-    .reg-box{
-      width:100%;
-      text-align:center;
-      padding:12px 14px;
-      font-size:13px;
-      letter-spacing:0.5px;
-      margin-top:4px;
-    }
-
-    /* Mobile Summary Grid - 2 Column */
-    .summary{
-      grid-template-columns:repeat(2,1fr);
-      gap:12px;
-      margin-top:12px;
-    }
-
-    .box{
-      padding:16px 12px;
-      border-radius:12px;
-    }
-
-    .num{
-      font-size:32px;
-      margin-bottom:6px;
-    }
-
-    .label{
-      font-size:12px;
-      letter-spacing:0;
-    }
-
-    /* ===== MOBILE DROPDOWN - BOTTOM MODAL STYLE ===== */
-    .btn-group.dropright{
+    /* Mobile date picker: toggle + inline pill grid */
+    .date-picker-wrap{
       margin:16px 0;
       width:100%;
       position:static;
+      display:block;
     }
 
-    .dropdown-toggle{
+    .date-toggle{
       width:100%;
       padding:14px 16px;
       font-size:15px;
@@ -823,269 +532,104 @@
       justify-content:space-between;
     }
 
-    .dropdown-toggle::after{
+    .date-toggle .arrow{
       border-top:5px solid transparent;
       border-bottom:5px solid transparent;
       border-left:6px solid #fff;
     }
 
-    /* Mobile Dropdown Menu - Bottom Sheet Modal */
-    .btn-group.dropright .dropdown-menu{
-      position:fixed;
-      bottom:-100%;
-      left:0;
-      right:0;
-      width:100%;
+    /* Inline pill grid — no fixed/absolute positioning */
+    .date-dropdown{
+      position:static;
       margin-left:0;
-      max-height:60vh;
-      border-radius:24px 24px 0 0;
-      padding:12px;
-      box-shadow:0 -4px 20px rgba(15,23,42,.15);
-      z-index:1000;
+      margin-top:10px;
       display:none;
-      flex-direction:column;
-      gap:4px;
-      animation:slideUp .3s cubic-bezier(0.32, 0.72, 0.3, 1) forwards;
+      flex-direction:row;
+      flex-wrap:wrap;
+      gap:8px;
+      padding:14px;
+      border-radius:14px;
+      background:#fff;
+      border:1px solid var(--border);
+      box-shadow:var(--shadow-md);
+      max-height:none;
+      overflow:visible;
     }
 
-    /* Slide Up Animation */
-    @keyframes slideUp{
-      from{
-        bottom:-100%;
-        opacity:0;
-      }
-      to{
-        bottom:0;
-        opacity:1;
-      }
-    }
-
-    /* Mobile Dropdown Menu Show */
-    .btn-group.dropright.show .dropdown-menu{
+    .date-picker-wrap.open .date-dropdown{
       display:flex;
     }
 
-    /* Mobile Dropdown Item */
-    .dropdown-item{
-      padding:14px 12px;
-      font-size:14px;
-      margin:3px 0;
-      border-radius:10px;
+    .date-item{
+      padding:9px 16px;
+      border-radius:999px;
+      font-size:13px;
+      font-weight:600;
+      background:#f1f5f9;
+      color:var(--text);
+      border:1.5px solid transparent;
+      flex:0 0 auto;
+      transition:.15s;
+      white-space:nowrap;
     }
 
-    /* Mobile Dropdown Item Active */
-    .dropdown-item:active{
+    .date-item:hover{
       background:var(--blue-soft);
       color:var(--primary);
+      border-color:rgba(37,99,235,.2);
     }
 
-    /* Mobile Attendance Grid - 2 Column */
-    .grid{
-      grid-template-columns:repeat(2,1fr);
-      gap:10px;
-      margin-top:12px;
+    .date-item.active{
+      background:var(--primary);
+      color:#fff;
+      border-color:var(--primary);
     }
 
-    .slot{
-      padding:16px 12px;
-      border-radius:12px;
-      border-width:1.2px;
-    }
-
-    .time{
-      font-size:11px;
-      margin-bottom:6px;
-    }
-
-    .status{
-      font-size:30px;
-      margin-bottom:4px;
-    }
-
-    .word{
-      font-size:12px;
-    }
+    .grid{ grid-template-columns:repeat(2,1fr); gap:10px; margin-top:12px; }
+    .slot{ padding:16px 12px; border-radius:12px; border-width:1.2px; }
+    .time{ font-size:11px; margin-bottom:6px; }
+    .status{ font-size:30px; margin-bottom:4px; }
+    .word{ font-size:12px; }
   }
 
-  /* ===== SMALL MOBILE (480px and below) ===== */
+  /* ===== SMALL MOBILE ===== */
   @media (max-width:480px){
-    body{
-      padding:12px 10px 40px;
-    }
+    body{ padding:12px 10px 40px; }
+    .container{ max-width:100%; }
+    .title{ margin:0 0 20px; }
+    .title h1{ font-size:28px; letter-spacing:-.5px; }
+    .title p{ font-size:13px; margin-top:6px; }
+    .card{ padding:14px; margin-bottom:12px; }
+    input{ padding:14px 14px 14px 44px; font-size:15px; border-radius:11px; }
+    .input-wrap svg{ width:18px; height:18px; left:12px; }
+    #error{ margin-top:10px; padding:10px 12px; font-size:13px; border-radius:10px; }
+    .clear-btn{ width:100%; padding:10px 12px; font-size:13px; border-radius:10px; margin-top:10px; }
 
-    .container{
-      max-width:100%;
-    }
+    .student-card{ padding:12px; gap:10px; }
+    .student-left{ gap:12px; }
+    .avatar{ width:48px; height:48px; font-size:17px; }
+    .student-name{ font-size:16px; margin-bottom:2px; }
+    .student-details{ font-size:12px; line-height:1.4; }
+    .student-details .chip{ padding:2px 7px; font-size:10px; margin:2px 0; }
+    .reg-box{ width:100%; padding:10px 12px; font-size:12px; letter-spacing:.3px; }
 
-    .title{
-      margin:0 0 20px;
-    }
+    .summary{ grid-template-columns:repeat(2,1fr); gap:10px; margin-top:10px; }
+    .box{ padding:12px 8px; border-radius:10px; }
+    .num{ font-size:26px; margin-bottom:4px; }
+    .label{ font-size:10px; letter-spacing:0; }
 
-    .title h1{
-      font-size:28px;
-      letter-spacing:-0.5px;
-    }
+    .date-picker-wrap{ margin:12px 0; width:100%; }
+    .date-toggle{ width:100%; padding:12px 14px; font-size:14px; gap:8px; border-radius:11px; min-width:unset; }
+    .date-toggle .arrow{ border-top:4px solid transparent; border-bottom:4px solid transparent; border-left:5px solid #fff; }
 
-    .title p{
-      font-size:13px;
-      margin-top:6px;
-    }
+    .date-dropdown{ padding:10px; gap:6px; border-radius:12px; margin-top:8px; }
+    .date-item{ padding:8px 13px; font-size:12px; border-radius:999px; }
 
-    .card{
-      padding:14px;
-      margin-bottom:12px;
-    }
-
-    input{
-      padding:14px 14px 14px 44px;
-      font-size:15px;
-      border-radius:11px;
-    }
-
-    .input-wrap svg{
-      width:18px;
-      height:18px;
-      left:12px;
-    }
-
-    #error{
-      margin-top:10px;
-      padding:10px 12px;
-      font-size:13px;
-      border-radius:10px;
-    }
-
-    .clear-btn{
-      width:100%;
-      padding:10px 12px;
-      font-size:13px;
-      border-radius:10px;
-      margin-top:10px;
-    }
-
-    /* Small Mobile Student Card */
-    .student-card{
-      padding:12px;
-      gap:10px;
-    }
-
-    .student-left{
-      gap:12px;
-    }
-
-    .avatar{
-      width:48px;
-      height:48px;
-      font-size:17px;
-    }
-
-    .student-name{
-      font-size:16px;
-      margin-bottom:2px;
-    }
-
-    .student-details{
-      font-size:12px;
-      line-height:1.4;
-    }
-
-    .student-details .chip{
-      padding:2px 7px;
-      font-size:10px;
-      margin:2px 0;
-    }
-
-    .reg-box{
-      width:100%;
-      padding:10px 12px;
-      font-size:12px;
-      letter-spacing:0.3px;
-    }
-
-    /* Small Mobile Summary Grid */
-    .summary{
-      grid-template-columns:repeat(2,1fr);
-      gap:10px;
-      margin-top:10px;
-    }
-
-    .box{
-      padding:12px 8px;
-      border-radius:10px;
-    }
-
-    .num{
-      font-size:26px;
-      margin-bottom:4px;
-    }
-
-    .label{
-      font-size:10px;
-      letter-spacing:0;
-    }
-
-    /* Small Mobile Dropdown */
-    .btn-group.dropright{
-      margin:12px 0;
-      width:100%;
-    }
-
-    .dropdown-toggle{
-      width:100%;
-      padding:12px 14px;
-      font-size:14px;
-      gap:8px;
-      border-radius:11px;
-      min-width:unset;
-    }
-
-    .dropdown-toggle::after{
-      border-top:4px solid transparent;
-      border-bottom:4px solid transparent;
-      border-left:5px solid #fff;
-    }
-
-    /* Small Mobile Dropdown Menu */
-    .btn-group.dropright .dropdown-menu{
-      max-height:50vh;
-      border-radius:20px 20px 0 0;
-      padding:8px;
-    }
-
-    /* Small Mobile Dropdown Item */
-    .dropdown-item{
-      padding:12px 10px;
-      font-size:13px;
-      margin:2px 0;
-      border-radius:8px;
-    }
-
-    /* Small Mobile Attendance Grid */
-    .grid{
-      grid-template-columns:repeat(2,1fr);
-      gap:8px;
-      margin-top:10px;
-    }
-
-    .slot{
-      padding:12px 10px;
-      border-radius:10px;
-      border-width:1px;
-    }
-
-    .time{
-      font-size:10px;
-      margin-bottom:5px;
-    }
-
-    .status{
-      font-size:26px;
-      margin-bottom:2px;
-    }
-
-    .word{
-      font-size:10px;
-    }
+    .grid{ grid-template-columns:repeat(2,1fr); gap:8px; margin-top:10px; }
+    .slot{ padding:12px 10px; border-radius:10px; border-width:1px; }
+    .time{ font-size:10px; margin-bottom:5px; }
+    .status{ font-size:26px; margin-bottom:2px; }
+    .word{ font-size:10px; }
   }
 </style>
 </head>
@@ -1096,7 +640,6 @@
       <p>11.05.2026 — 23.05.2026</p>
     </div>
 
-    <!-- Search Input Card -->
     <div class="card">
       <div class="input-wrap">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
@@ -1106,54 +649,42 @@
       <div id="error">⚠ Student Not Found — please check your registration number.</div>
     </div>
 
-    <!-- Results Card (Hidden by default) -->
     <div id="result">
       <div class="card">
-        <!-- Student Info Card -->
         <div id="studentInfo"></div>
-
-        <!-- Summary Statistics -->
         <div id="summary" class="summary"></div>
 
-        <!-- Date Dropdown: Desktop (Right-Positioned), Mobile (Bottom Modal) -->
-        <div class="btn-group dropright" id="dateDropdown">
-          <button type="button" class="dropdown-toggle" onclick="toggleDropdown(event)" aria-haspopup="true" aria-expanded="false">
+        <!-- Date picker: desktop = right-side dropdown, mobile = inline pill grid -->
+        <div class="date-picker-wrap" id="datePickerWrap">
+          <button type="button" class="date-toggle" onclick="toggleDatePicker(event)" aria-haspopup="true" aria-expanded="false">
             <span id="selectedDate">23.05.2026</span>
+            <span class="arrow"></span>
           </button>
-          <div class="dropdown-menu" id="dropdownMenu"></div>
+          <div class="date-dropdown" id="dateDropdown"></div>
         </div>
 
-        <!-- Attendance Grid -->
         <div id="attendanceGrid" class="grid"></div>
       </div>
     </div>
   </div>
 
 <script>
-  // ===== DATA STORAGE AND STATE =====
   let allData = {};
   let currentReg = "";
   let currentDate = "";
 
-  // Define attendance dates
   const dates = ["11","12","13","14","15","16","18","19","20","21","22","23"]
     .map(d => `${d}.05.2026`);
 
-  // Fetch attendance data from GitHub repository
   Promise.all(
     dates.map(d =>
       fetch(`https://raw.githubusercontent.com/studentsofklu/crt-attendances/main/Y23%20CRT%20Attendance%20(${d}).json`)
         .then(r => r.json())
     )
   ).then(data => {
-    // Store data for each date
-    dates.forEach((d, i) => { 
-      allData[d] = data[i].slice(2); 
-    });
+    dates.forEach((d, i) => { allData[d] = data[i].slice(2); });
   });
 
-  // ===== INPUT EVENT LISTENER =====
-  // Listen for input changes and trigger search
   document.getElementById("regInput").addEventListener("input", function () {
     let regNo = this.value.trim();
     if (regNo.length === 10) {
@@ -1165,8 +696,6 @@
     }
   });
 
-  // ===== CLEAR DATA FUNCTION =====
-  // Clear input and reset display
   function clearData() {
     document.getElementById("regInput").value = "";
     document.getElementById("result").style.display = "none";
@@ -1175,19 +704,15 @@
     document.getElementById("regInput").focus();
   }
 
-  // ===== SEARCH STUDENT FUNCTION =====
-  // Search for student in attendance data
   function searchStudent() {
     let regNo = document.getElementById("regInput").value.trim();
     let student = null;
-    
-    // Search through all dates for the student
+
     Object.keys(allData).forEach(date => {
       let found = allData[date].find(item => item["__EMPTY_6"] == regNo);
       if (found) student = found;
     });
 
-    // Show error if not found
     if (!student) {
       document.getElementById("error").style.display = "block";
       document.getElementById("result").style.display = "none";
@@ -1195,81 +720,73 @@
       return;
     }
 
-    // Show results if found
     document.getElementById("error").style.display = "none";
     document.getElementById("result").style.display = "block";
     document.getElementById("clearBtn").style.display = "inline-block";
 
-    // Set current student and get last date
     currentReg = regNo;
     let lastDate = Object.keys(allData).pop();
     currentDate = lastDate;
-    
-    // Create dropdown and show attendance
-    createDayButtons(regNo);
+
+    buildDateItems(regNo);
     showAttendance(lastDate, regNo);
   }
 
-  // ===== CREATE DROPDOWN ITEMS =====
-  // Create dropdown menu items for date selection
-  function createDayButtons(regNo) {
+  function buildDateItems(regNo) {
     let html = "";
     Object.keys(allData).forEach(date => {
-      html += `<div class="dropdown-item ${date===currentDate?'active':''}" data-date="${date}" onclick="selectDate('${date}','${regNo}')">${date}</div>`;
+      html += `<div class="date-item ${date===currentDate?'active':''}" data-date="${date}" onclick="selectDate('${date}','${regNo}')">${date}</div>`;
     });
-    document.getElementById("dropdownMenu").innerHTML = html;
+    document.getElementById("dateDropdown").innerHTML = html;
   }
 
-  // ===== TOGGLE DROPDOWN FUNCTION =====
-  // Toggle dropdown menu visibility
-  function toggleDropdown(e) {
-    if(e) e.stopPropagation();
-    let dropdown = document.getElementById("dateDropdown");
-    dropdown.classList.toggle("show");
-    
-    // Setup event listener for closing dropdown when clicking outside
-    if(dropdown.classList.contains("show")) {
-      setTimeout(() => {
-        document.addEventListener("click", closeDropdownOnClickOutside);
-      }, 0);
+  function toggleDatePicker(e) {
+    if (e) e.stopPropagation();
+    let wrap = document.getElementById("datePickerWrap");
+    let isOpen = wrap.classList.contains("open");
+
+    if (isOpen) {
+      closeDatePicker();
+    } else {
+      wrap.classList.add("open");
+      // Only attach outside-click listener on desktop
+      if (window.innerWidth > 768) {
+        setTimeout(() => {
+          document.addEventListener("click", outsideClick);
+        }, 0);
+      }
     }
   }
 
-  // ===== CLOSE DROPDOWN ON CLICK OUTSIDE =====
-  // Close dropdown when clicking outside
-  function closeDropdownOnClickOutside(e) {
-    let dropdown = document.getElementById("dateDropdown");
-    if (!e.target.closest('#dateDropdown')) {
-      dropdown.classList.remove("show");
-      document.removeEventListener("click", closeDropdownOnClickOutside);
+  function closeDatePicker() {
+    document.getElementById("datePickerWrap").classList.remove("open");
+    document.removeEventListener("click", outsideClick);
+  }
+
+  function outsideClick(e) {
+    if (!e.target.closest("#datePickerWrap")) {
+      closeDatePicker();
     }
   }
 
-  // ===== SELECT DATE FUNCTION =====
-  // Handle date selection from dropdown
   function selectDate(date, regNo) {
     currentDate = date;
     document.getElementById("selectedDate").innerText = date;
-    document.getElementById("dateDropdown").classList.remove("show");
-    createDayButtons(regNo);
+    closeDatePicker();
+    buildDateItems(regNo);
     showAttendance(date, regNo);
   }
 
-  // ===== SHOW ATTENDANCE FUNCTION =====
-  // Display attendance for selected date
   function showAttendance(date, regNo) {
     let student = allData[date].find(item => item["__EMPTY_6"] == regNo);
     let html = "";
-    
-    // Time slots for each class
+
     let timings = [
       "09:20 - 10:10","10:10 - 11:00","11:10 - 12:00","12:00 - 12:50",
       "01:50 - 02:40","02:40 - 03:40","03:50 - 04:30","04:30 - 05:30"
     ];
 
-    // Generate attendance slots for each time period
     if (!student) {
-      // If student not found for this date, show all absent
       for (let i = 0; i < 8; i++) {
         html += `
           <div class="slot absent">
@@ -1279,7 +796,6 @@
           </div>`;
       }
     } else {
-      // Build slots from student attendance data
       let slots = [
         [timings[0], student["3"]],
         [timings[1], student["4"]],
@@ -1290,8 +806,7 @@
         [timings[6], student["10"]],
         [timings[7], student["11"]]
       ];
-      
-      // Render each slot
+
       slots.forEach(item => {
         let [time, status] = item;
         html += `
@@ -1304,35 +819,25 @@
     }
     document.getElementById("attendanceGrid").innerHTML = html;
 
-    // ===== CALCULATE OVERALL STATISTICS =====
     let overallPresent = 0, overallTotal = 0;
-    
-    // Count across all dates
     Object.keys(allData).forEach(day => {
       let stu = allData[day].find(item => item["__EMPTY_6"] == regNo);
       if (stu) {
-        // Count present classes
         ["3","4","5","7","8","9","10","11"].forEach(k => {
           if (stu[k] == "P") overallPresent++;
           overallTotal++;
         });
       } else {
-        // If not in this date, count as absent
         overallTotal += 8;
       }
     });
 
     let overallAbsent = overallTotal - overallPresent;
     let overallPercentage = ((overallPresent / overallTotal) * 100).toFixed(0);
-    
-    // Calculate classes needed for 85% attendance
     let required = Math.ceil((0.85 * overallTotal - overallPresent) / (1 - 0.85));
     let classesNeeded = required > 0 ? required : 0;
 
-    // ===== GET STUDENT PROFILE INFO =====
     let infoStudent = student;
-    
-    // Fallback to any record with name if current date has no entry
     if (!infoStudent || !infoStudent["__EMPTY"]) {
       Object.keys(allData).forEach(day => {
         let stu = allData[day].find(item => item["__EMPTY_6"] == regNo);
@@ -1340,15 +845,9 @@
       });
     }
 
-    // Extract student information
     const name    = infoStudent["__EMPTY"]   || "—";
-    const branch  = infoStudent["__EMPTY_1"] || "—";
-    const section = infoStudent["__EMPTY_3"] || infoStudent["__EMPTY_2"] || "—";
-    const crtCode = infoStudent["__EMPTY_4"] || "—";
-    const crtRoom = infoStudent["__EMPTY_5"] || "—";
     const reg     = infoStudent["__EMPTY_6"] || regNo;
 
-    // ===== RENDER STUDENT INFORMATION CARD =====
     document.getElementById("studentInfo").innerHTML = `
       <div class="student-card">
         <div class="student-left">
@@ -1358,41 +857,34 @@
           <div class="student-info-wrapper">
             <div class="student-name">${name}</div>
             <div class="student-details">
-              <span class="chip">DEP ${infoStudent["__EMPTY_2"] || "—"}</span>
+              <span class="chip">DEPT ${infoStudent["__EMPTY_2"] || "—"}</span>
               <span class="chip">Cluster ${infoStudent["__EMPTY_3"] || "—"}</span>
               <span class="chip">CRT SEC ${infoStudent["__EMPTY_4"] || "—"}</span>
               <span class="chip">CRT Room ${infoStudent["__EMPTY_5"] || "—"}</span>
             </div>
           </div>
         </div>
-        <div class="reg-box">
-          ${infoStudent["__EMPTY_6"] || "—"}
-        </div>
+        <div class="reg-box">${reg}</div>
       </div>
     `;
 
-    // ===== RENDER SUMMARY STATISTICS =====
     document.getElementById("summary").innerHTML = `
       <div class="box">
         <div class="num" style="color:#2563eb;">${overallTotal}</div>
         <div class="label">Total Classes</div>
       </div>
-
       <div class="box">
         <div class="num" style="color:#16a34a;">${overallPresent}</div>
         <div class="label">Present</div>
       </div>
-
       <div class="box">
         <div class="num" style="color:#dc2626;">${overallAbsent}</div>
         <div class="label">Absent</div>
       </div>
-
       <div class="box">
         <div class="num" style="color:#9333ea;">${overallPercentage}%</div>
         <div class="label">Attendance</div>
       </div>
-
       <div class="box">
         <div class="num" style="color:#f59e0b;">${classesNeeded}</div>
         <div class="label">Classes Needed</div>
