@@ -8,6 +8,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
 <style>
+  /* CSS Variables for Theme Colors and Spacing */
   :root{
     --bg:#f6f8fb;
     --bg-grad:radial-gradient(1200px 600px at 10% -10%, #e0e7ff 0%, transparent 60%),
@@ -29,8 +30,21 @@
     --shadow-lg:0 20px 40px -20px rgba(37,99,235,.25), 0 10px 20px -10px rgba(15,23,42,.1);
     --radius:18px;
   }
-  *{margin:0;padding:0;box-sizing:border-box;font-family:'Inter',system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;}
-  html,body{height:100%;}
+
+  /* Global Reset and Base Styles */
+  *{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Inter',system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+  }
+
+  /* HTML and Body Base Styles */
+  html,body{
+    height:100%;
+  }
+
+  /* Body Background and Layout */
   body{
     background:var(--bg);
     background-image:var(--bg-grad);
@@ -39,28 +53,66 @@
     padding:24px 16px 48px;
     -webkit-font-smoothing:antialiased;
   }
-  .container{max-width:1240px;margin:auto;}
 
-  /* Header */
-  .title{text-align:center;margin:8px 0 28px;}
+  /* Container Max Width */
+  .container{
+    max-width:1240px;
+    margin:auto;
+  }
+
+  /* ===== HEADER STYLES ===== */
+  .title{
+    text-align:center;
+    margin:8px 0 28px;
+  }
+
+  /* Badge for Status Indicator */
   .badge{
-    display:inline-flex;align-items:center;gap:8px;
-    padding:6px 14px;border-radius:999px;
-    background:rgba(37,99,235,.08);color:var(--primary);
-    font-weight:600;font-size:13px;letter-spacing:.3px;
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    padding:6px 14px;
+    border-radius:999px;
+    background:rgba(37,99,235,.08);
+    color:var(--primary);
+    font-weight:600;
+    font-size:13px;
+    letter-spacing:.3px;
     border:1px solid rgba(37,99,235,.15);
     margin-bottom:14px;
   }
-  .badge::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--primary);box-shadow:0 0 0 4px rgba(37,99,235,.15);}
+
+  /* Badge Dot Indicator */
+  .badge::before{
+    content:"";
+    width:7px;
+    height:7px;
+    border-radius:50%;
+    background:var(--primary);
+    box-shadow:0 0 0 4px rgba(37,99,235,.15);
+  }
+
+  /* Title Heading */
   .title h1{
     font-size:clamp(28px,4.2vw,44px);
-    color:var(--text);font-weight:800;letter-spacing:-1px;
+    color:var(--text);
+    font-weight:800;
+    letter-spacing:-1px;
     background:linear-gradient(90deg,#0b1220,#2563eb);
-    -webkit-background-clip:text;background-clip:text;color:transparent;
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
   }
-  .title p{margin-top:8px;font-size:16px;color:var(--muted);font-weight:500;}
 
-  /* Card */
+  /* Title Subtitle */
+  .title p{
+    margin-top:8px;
+    font-size:16px;
+    color:var(--muted);
+    font-weight:500;
+  }
+
+  /* ===== CARD STYLES ===== */
   .card{
     background:var(--card);
     padding:22px;
@@ -70,16 +122,29 @@
     margin-bottom:20px;
   }
 
-  /* Input */
-  .input-wrap{position:relative;}
-  .input-wrap svg{
-    position:absolute;left:18px;top:50%;transform:translateY(-50%);
-    width:22px;height:22px;color:var(--muted);pointer-events:none;
+  /* ===== INPUT STYLES ===== */
+  .input-wrap{
+    position:relative;
   }
+
+  /* Search Icon in Input */
+  .input-wrap svg{
+    position:absolute;
+    left:18px;
+    top:50%;
+    transform:translateY(-50%);
+    width:22px;
+    height:22px;
+    color:var(--muted);
+    pointer-events:none;
+  }
+
+  /* Input Field */
   input{
     width:100%;
     padding:18px 18px 18px 52px;
-    font-size:18px;font-weight:500;
+    font-size:18px;
+    font-weight:500;
     border:2px solid var(--border);
     border-radius:14px;
     outline:none;
@@ -88,428 +153,938 @@
     color:var(--text);
     letter-spacing:.5px;
   }
-  input::placeholder{color:#94a3b8;font-weight:500;letter-spacing:.3px;}
-  input:focus{border-color:var(--primary);background:#fff;box-shadow:0 0 0 4px rgba(37,99,235,.12);}
 
+  /* Input Placeholder */
+  input::placeholder{
+    color:#94a3b8;
+    font-weight:500;
+    letter-spacing:.3px;
+  }
+
+  /* Input Focus State */
+  input:focus{
+    border-color:var(--primary);
+    background:#fff;
+    box-shadow:0 0 0 4px rgba(37,99,235,.12);
+  }
+
+  /* Clear Button */
   .clear-btn{
-    margin-top:14px;padding:12px 22px;
-    background:#fff;color:var(--red);
+    margin-top:14px;
+    padding:12px 22px;
+    background:#fff;
+    color:var(--red);
     border:1.5px solid var(--red);
-    border-radius:12px;font-size:15px;font-weight:600;
-    cursor:pointer;display:none;transition:.2s;
+    border-radius:12px;
+    font-size:15px;
+    font-weight:600;
+    cursor:pointer;
+    display:none;
+    transition:.2s;
   }
-  .clear-btn:hover{background:var(--red);color:#fff;}
 
+  /* Clear Button Hover */
+  .clear-btn:hover{
+    background:var(--red);
+    color:#fff;
+  }
+
+  /* Error Message Container */
   #error{
-    margin-top:14px;padding:12px 16px;
-    background:var(--red-soft);color:var(--red);
-    border:1px solid #fecaca;border-radius:12px;
-    font-size:15px;font-weight:600;display:none;
+    margin-top:14px;
+    padding:12px 16px;
+    background:var(--red-soft);
+    color:var(--red);
+    border:1px solid #fecaca;
+    border-radius:12px;
+    font-size:15px;
+    font-weight:600;
+    display:none;
   }
 
-  #result{display:none;animation:fadeIn .4s ease;}
-  @keyframes fadeIn{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:none;}}
+  /* Result Container Animation */
+  #result{
+    display:none;
+    animation:fadeIn .4s ease;
+  }
 
-  /* Student card */
+  /* Fade In Animation */
+  @keyframes fadeIn{
+    from{
+      opacity:0;
+      transform:translateY(6px);
+    }
+    to{
+      opacity:1;
+      transform:none;
+    }
+  }
+
+  /* ===== STUDENT CARD STYLES ===== */
   .student-card{
     background:linear-gradient(135deg,#ffffff 0%,#f8fafc 100%);
     border:1px solid var(--border);
     border-radius:var(--radius);
     padding:22px;
-    display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:20px;
+    flex-wrap:wrap;
   }
-  .student-left{display:flex;align-items:center;gap:18px;flex-wrap:wrap;}
+
+  /* Student Left Container */
+  .student-left{
+    display:flex;
+    align-items:center;
+    gap:18px;
+    flex-wrap:wrap;
+  }
+
+  /* Avatar Circle */
   .avatar{
-    width:64px;height:64px;border-radius:50%;
+    width:64px;
+    height:64px;
+    border-radius:50%;
     background:linear-gradient(135deg,#2563eb,#7c3aed);
-    display:flex;align-items:center;justify-content:center;
-    font-size:22px;font-weight:700;color:#fff;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:22px;
+    font-weight:700;
+    color:#fff;
     box-shadow:0 8px 20px rgba(37,99,235,.3);
     letter-spacing:.5px;
     flex-shrink:0;
   }
-  .student-info-wrapper{flex:1;min-width:200px;}
-  .student-name{font-size:20px;font-weight:700;color:var(--text);margin-bottom:4px;letter-spacing:-.2px;}
-  .student-details{font-size:14px;color:var(--muted);font-weight:500;line-height:1.6;}
-  .student-details .chip{
-    display:inline-block;padding:2px 10px;border-radius:999px;
-    background:var(--blue-soft);color:var(--primary);font-weight:600;font-size:12px;margin-right:6px;margin-bottom:4px;
+
+  /* Student Info Wrapper */
+  .student-info-wrapper{
+    flex:1;
+    min-width:200px;
   }
-  .progress-container{display:flex;align-items:center;gap:12px;margin-top:14px;}
-  .progress-bar{width:300px;max-width:60vw;height:8px;background:#e2e8f0;border-radius:20px;overflow:hidden;}
-  .progress-fill{height:100%;background:linear-gradient(90deg,#16a34a,#22c55e);border-radius:20px;transition:width .8s ease;}
-  .progress-text{font-size:16px;font-weight:700;color:var(--green);}
+
+  /* Student Name */
+  .student-name{
+    font-size:20px;
+    font-weight:700;
+    color:var(--text);
+    margin-bottom:4px;
+    letter-spacing:-.2px;
+  }
+
+  /* Student Details Container */
+  .student-details{
+    font-size:14px;
+    color:var(--muted);
+    font-weight:500;
+    line-height:1.6;
+  }
+
+  /* Info Chip Tags */
+  .student-details .chip{
+    display:inline-block;
+    padding:2px 10px;
+    border-radius:999px;
+    background:var(--blue-soft);
+    color:var(--primary);
+    font-weight:600;
+    font-size:12px;
+    margin-right:6px;
+    margin-bottom:4px;
+  }
+
+  /* Progress Container */
+  .progress-container{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    margin-top:14px;
+  }
+
+  /* Progress Bar Background */
+  .progress-bar{
+    width:300px;
+    max-width:60vw;
+    height:8px;
+    background:#e2e8f0;
+    border-radius:20px;
+    overflow:hidden;
+  }
+
+  /* Progress Bar Fill */
+  .progress-fill{
+    height:100%;
+    background:linear-gradient(90deg,#16a34a,#22c55e);
+    border-radius:20px;
+    transition:width .8s ease;
+  }
+
+  /* Progress Text */
+  .progress-text{
+    font-size:16px;
+    font-weight:700;
+    color:var(--green);
+  }
+
+  /* Registration Box */
   .reg-box{
-    background:#0b1220;color:#fff;
-    padding:14px 22px;border-radius:12px;
-    font-size:16px;font-weight:700;letter-spacing:1px;
+    background:#0b1220;
+    color:#fff;
+    padding:14px 22px;
+    border-radius:12px;
+    font-size:16px;
+    font-weight:700;
+    letter-spacing:1px;
     font-family:'JetBrains Mono',ui-monospace,monospace;
     flex-shrink:0;
   }
 
-  /* Summary */
+  /* ===== SUMMARY BOXES ===== */
   .summary{
     margin-top:18px;
-    display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:14px;
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(140px,1fr));
+    gap:14px;
   }
-  .box{
-    background:#fff;border:1px solid var(--border);
-    border-radius:var(--radius);
-    padding:24px 18px;text-align:center;
-    transition:.25s;box-shadow:var(--shadow-sm);
-    position:relative;overflow:hidden;
-  }
-  .box::before{
-    content:"";position:absolute;inset:0 0 auto 0;height:3px;
-    background:linear-gradient(90deg,#2563eb,#7c3aed);opacity:0;transition:.25s;
-  }
-  .box:hover{transform:translateY(-3px);box-shadow:var(--shadow-md);}
-  .box:hover::before{opacity:1;}
-  .num{font-size:44px;font-weight:800;line-height:1;letter-spacing:-1.5px;margin-bottom:10px;}
-  .green{color:var(--green);}
-  .red{color:var(--red);}
-  .blue{color:var(--primary);}
-  .label{font-size:14px;font-weight:600;color:var(--muted);letter-spacing:.3px;text-transform:uppercase;}
 
-  /* Dropright (Bootstrap-style) - MOBILE OPTIMIZED */
+  /* Summary Box */
+  .box{
+    background:#fff;
+    border:1px solid var(--border);
+    border-radius:var(--radius);
+    padding:24px 18px;
+    text-align:center;
+    transition:.25s;
+    box-shadow:var(--shadow-sm);
+    position:relative;
+    overflow:hidden;
+  }
+
+  /* Box Top Border on Hover */
+  .box::before{
+    content:"";
+    position:absolute;
+    inset:0 0 auto 0;
+    height:3px;
+    background:linear-gradient(90deg,#2563eb,#7c3aed);
+    opacity:0;
+    transition:.25s;
+  }
+
+  /* Box Hover Effect */
+  .box:hover{
+    transform:translateY(-3px);
+    box-shadow:var(--shadow-md);
+  }
+
+  /* Box Hover Top Border */
+  .box:hover::before{
+    opacity:1;
+  }
+
+  /* Box Number */
+  .num{
+    font-size:44px;
+    font-weight:800;
+    line-height:1;
+    letter-spacing:-1.5px;
+    margin-bottom:10px;
+  }
+
+  /* Green Text Color */
+  .green{
+    color:var(--green);
+  }
+
+  /* Red Text Color */
+  .red{
+    color:var(--red);
+  }
+
+  /* Blue Text Color */
+  .blue{
+    color:var(--primary);
+  }
+
+  /* Box Label */
+  .label{
+    font-size:14px;
+    font-weight:600;
+    color:var(--muted);
+    letter-spacing:.3px;
+    text-transform:uppercase;
+  }
+
+  /* ===== DESKTOP DROPDOWN (1024px and above) ===== */
   .btn-group.dropright{
-    position:relative;display:inline-flex;margin:24px 0;
-    width:100%;
+    position:relative;
+    display:inline-flex;
+    margin:24px 0;
   }
+
+  /* Dropdown Toggle Button */
   .dropdown-toggle{
-    padding:14px 22px;border:none;border-radius:14px;
+    padding:14px 22px;
+    border:none;
+    border-radius:14px;
     background:linear-gradient(135deg,var(--primary),var(--primary-dark));
-    color:#fff;font-size:16px;font-weight:600;cursor:pointer;
-    display:inline-flex;align-items:center;gap:14px;
-    box-shadow:var(--shadow-lg);transition:.2s;width:100%;justify-content:space-between;
+    color:#fff;
+    font-size:16px;
+    font-weight:600;
+    cursor:pointer;
+    display:inline-flex;
+    align-items:center;
+    gap:14px;
+    box-shadow:var(--shadow-lg);
+    transition:.2s;
+    min-width:240px;
+    justify-content:space-between;
   }
-  .dropdown-toggle:hover{transform:translateY(-1px);}
+
+  /* Dropdown Toggle Hover */
+  .dropdown-toggle:hover{
+    transform:translateY(-1px);
+  }
+
+  /* Dropdown Arrow Icon */
   .dropdown-toggle::after{
-    content:"";display:inline-block;
-    width:0;height:0;
+    content:"";
+    display:inline-block;
+    width:0;
+    height:0;
     border-top:6px solid transparent;
     border-bottom:6px solid transparent;
     border-left:7px solid #fff;
     transition:transform .25s;
     flex-shrink:0;
   }
-  .btn-group.dropright.show .dropdown-toggle::after{transform:rotate(90deg);}
-  
-  /* Dropdown menu - FULL WIDTH ON MOBILE */
-  .btn-group.dropright .dropdown-menu{
-    position:fixed;bottom:-100%;left:0;right:0;
-    width:100%;background:#fff;border:1px solid var(--border);
-    border-radius:24px 24px 0 0;padding:6px;display:none;flex-direction:column;gap:2px;
-    box-shadow:0 20px 40px rgba(15,23,42,.12);
-    z-index:100;max-height:340px;overflow-y:auto;
-    animation:slideUp .3s ease;
-  }
-  @keyframes slideUp{from{bottom:-100%;}to{bottom:0;}}
-  
-  .btn-group.dropright.show .dropdown-menu{display:flex;}
-  .dropdown-item{
-    padding:12px 14px;border-radius:10px;cursor:pointer;
-    font-size:14px;font-weight:600;transition:.15s;color:var(--text);
-    margin:0 8px;
-  }
-  .dropdown-item:hover,.dropdown-item.active{background:var(--blue-soft);color:var(--primary);}
 
-  /* Slots - RESPONSIVE GRID */
+  /* Dropdown Arrow Rotation */
+  .btn-group.dropright.show .dropdown-toggle::after{
+    transform:rotate(90deg);
+  }
+
+  /* Desktop Dropdown Menu - Right Positioned */
+  .btn-group.dropright .dropdown-menu{
+    position:absolute;
+    top:0;
+    left:100%;
+    margin-left:10px;
+    min-width:200px;
+    background:#fff;
+    border:1px solid var(--border);
+    border-radius:14px;
+    padding:6px;
+    display:none;
+    flex-direction:column;
+    gap:2px;
+    box-shadow:0 20px 40px rgba(15,23,42,.12);
+    z-index:100;
+    max-height:340px;
+    overflow-y:auto;
+  }
+
+  /* Desktop Dropdown Menu Show */
+  .btn-group.dropright.show .dropdown-menu{
+    display:flex;
+  }
+
+  /* Dropdown Item */
+  .dropdown-item{
+    padding:12px 14px;
+    border-radius:10px;
+    cursor:pointer;
+    font-size:14px;
+    font-weight:600;
+    transition:.15s;
+    color:var(--text);
+  }
+
+  /* Dropdown Item Hover and Active */
+  .dropdown-item:hover,.dropdown-item.active{
+    background:var(--blue-soft);
+    color:var(--primary);
+  }
+
+  /* ===== ATTENDANCE GRID ===== */
   .grid{
     display:grid;
     grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
     gap:12px;
     margin-top:20px;
   }
-  .slot{
-    padding:20px 16px;border-radius:14px;text-align:center;
-    border:1.5px solid;transition:.2s;
-  }
-  .slot:hover{transform:translateY(-2px);box-shadow:var(--shadow-sm);}
-  .present{background:var(--green-soft);border-color:#86efac;}
-  .absent{background:var(--red-soft);border-color:#fca5a5;}
-  .time{font-size:13px;color:var(--muted);margin-bottom:10px;font-weight:600;letter-spacing:.3px;}
-  .status{font-size:36px;font-weight:800;margin-bottom:6px;letter-spacing:-1px;}
-  .present .status{color:var(--green);}
-  .absent .status{color:var(--red);}
-  .word{font-size:14px;font-weight:700;color:var(--text);text-transform:uppercase;letter-spacing:.5px;}
 
-  /* MOBILE RESPONSIVE STYLES */
-  @media (max-width:768px){
+  /* Attendance Slot */
+  .slot{
+    padding:20px 16px;
+    border-radius:14px;
+    text-align:center;
+    border:1.5px solid;
+    transition:.2s;
+  }
+
+  /* Slot Hover */
+  .slot:hover{
+    transform:translateY(-2px);
+    box-shadow:var(--shadow-sm);
+  }
+
+  /* Present Slot */
+  .present{
+    background:var(--green-soft);
+    border-color:#86efac;
+  }
+
+  /* Absent Slot */
+  .absent{
+    background:var(--red-soft);
+    border-color:#fca5a5;
+  }
+
+  /* Slot Time */
+  .time{
+    font-size:13px;
+    color:var(--muted);
+    margin-bottom:10px;
+    font-weight:600;
+    letter-spacing:.3px;
+  }
+
+  /* Slot Status Letter */
+  .status{
+    font-size:36px;
+    font-weight:800;
+    margin-bottom:6px;
+    letter-spacing:-1px;
+  }
+
+  /* Present Status Color */
+  .present .status{
+    color:var(--green);
+  }
+
+  /* Absent Status Color */
+  .absent .status{
+    color:var(--red);
+  }
+
+  /* Slot Word */
+  .word{
+    font-size:14px;
+    font-weight:700;
+    color:var(--text);
+    text-transform:uppercase;
+    letter-spacing:.5px;
+  }
+
+  /* ===== TABLET & LAPTOP RESPONSIVE (1024px and below) ===== */
+  @media (max-width:1024px){
     body{
-      padding:16px 12px 48px;
+      padding:20px 14px 48px;
     }
+
     .title h1{
-      font-size:32px;
+      font-size:36px;
     }
+
     .card{
-      padding:16px;
-      margin-bottom:16px;
+      padding:18px;
+      margin-bottom:18px;
     }
+
     input{
-      padding:16px 16px 16px 48px;
+      padding:16px 16px 16px 50px;
       font-size:16px;
     }
+
     .input-wrap svg{
-      width:20px;height:20px;
-      left:14px;
+      width:20px;
+      height:20px;
+      left:16px;
     }
+
     .clear-btn{
-      width:100%;
-      padding:12px 16px;
-      margin-top:12px;
+      padding:12px 18px;
       font-size:14px;
     }
-    
-    /* Mobile Student Card */
+
     .student-card{
-      flex-direction:column;
-      align-items:flex-start;
-      gap:14px;
-      padding:16px;
-    }
-    .student-left{
-      width:100%;
       flex-direction:row;
+      gap:16px;
     }
-    .student-info-wrapper{
+
+    .student-left{
       flex:1;
-      width:100%;
     }
-    .student-details .chip{
-      display:block;
-      margin:4px 0;
-      margin-right:0;
-    }
+
     .avatar{
       width:56px;
       height:56px;
       font-size:20px;
     }
+
     .student-name{
       font-size:18px;
     }
-    .reg-box{
-      width:100%;
-      text-align:center;
-      padding:12px 16px;
-      font-size:14px;
-    }
-    
-    /* Mobile Summary Grid */
-    .summary{
-      grid-template-columns:repeat(2,1fr);
-      gap:12px;
-      margin-top:14px;
-    }
-    .box{
-      padding:18px 12px;
-    }
-    .num{
-      font-size:32px;
-      margin-bottom:8px;
-    }
-    .label{
-      font-size:12px;
-    }
-    
-    /* Mobile Dropdown */
-    .btn-group.dropright{
-      margin:16px 0;
-      width:100%;
-    }
-    .dropdown-toggle{
-      width:100%;
-      padding:14px 16px;
-      font-size:15px;
-      gap:10px;
-    }
-    .dropdown-toggle::after{
-      border-top:5px solid transparent;
-      border-bottom:5px solid transparent;
-      border-left:6px solid #fff;
-    }
-    .btn-group.dropright .dropdown-menu{
-      position:fixed;
-      bottom:0;
-      left:0;
-      right:0;
-      width:100%;
-      max-height:50vh;
-      border-radius:24px 24px 0 0;
-    }
-    .dropdown-item{
-      padding:14px 12px;
-      font-size:15px;
-      margin:2px 4px;
-    }
-    
-    /* Mobile Attendance Grid */
-    .grid{
-      grid-template-columns:repeat(2,1fr);
-      gap:10px;
-      margin-top:14px;
-    }
-    .slot{
-      padding:16px 12px;
-      border-radius:12px;
-    }
-    .time{
-      font-size:12px;
-      margin-bottom:8px;
-    }
-    .status{
-      font-size:32px;
+
+    .student-details .chip{
+      display:inline-block;
+      margin-right:6px;
       margin-bottom:4px;
     }
-    .word{
+
+    .reg-box{
+      padding:12px 18px;
+      font-size:14px;
+    }
+
+    .summary{
+      grid-template-columns:repeat(3,1fr);
+      gap:12px;
+    }
+
+    .box{
+      padding:20px 14px;
+    }
+
+    .num{
+      font-size:40px;
+    }
+
+    .label{
+      font-size:13px;
+    }
+
+    .btn-group.dropright{
+      margin:20px 0;
+    }
+
+    .dropdown-toggle{
+      padding:13px 18px;
+      font-size:15px;
+      gap:10px;
+      min-width:220px;
+    }
+
+    .grid{
+      grid-template-columns:repeat(4,1fr);
+      gap:10px;
+    }
+
+    .slot{
+      padding:18px 14px;
+    }
+
+    .time{
       font-size:12px;
+    }
+
+    .status{
+      font-size:32px;
     }
   }
 
-  @media (max-width:480px){
+  /* ===== MOBILE (768px and below) - BOTTOM MODAL DROPDOWN ===== */
+  @media (max-width:768px){
     body{
-      padding:12px 10px 40px;
+      padding:16px 12px 48px;
     }
-    .container{
-      max-width:100%;
-    }
-    .title{
-      margin:0 0 20px;
-    }
+
     .title h1{
-      font-size:28px;
-      letter-spacing:-0.5px;
+      font-size:32px;
     }
+
     .title p{
       font-size:14px;
-      margin-top:6px;
     }
+
     .card{
-      padding:14px;
-      margin-bottom:12px;
+      padding:16px;
+      margin-bottom:16px;
     }
+
     input{
-      padding:14px 14px 14px 44px;
-      font-size:15px;
+      padding:16px 16px 16px 48px;
+      font-size:16px;
       border-radius:12px;
     }
+
     .input-wrap svg{
-      width:18px;height:18px;
-      left:12px;
+      width:20px;
+      height:20px;
+      left:14px;
     }
+
+    .clear-btn{
+      width:100%;
+      padding:12px 16px;
+      margin-top:12px;
+      font-size:14px;
+      border-radius:10px;
+    }
+
     #error{
       margin-top:10px;
       padding:10px 12px;
       font-size:13px;
       border-radius:10px;
     }
-    .clear-btn{
-      width:100%;
-      padding:11px 14px;
-      font-size:13px;
-      border-radius:10px;
-      margin-top:10px;
-    }
-    
-    /* Mobile Student Card (Small) */
+
+    /* Mobile Student Card */
     .student-card{
-      padding:12px;
-      gap:10px;
+      flex-direction:column;
+      align-items:flex-start;
+      gap:12px;
+      padding:14px;
     }
-    .avatar{
-      width:48px;
-      height:48px;
-      font-size:18px;
+
+    .student-left{
+      width:100%;
+      flex-direction:row;
+      gap:14px;
     }
-    .student-name{
-      font-size:16px;
-      margin-bottom:2px;
+
+    .student-info-wrapper{
+      flex:1;
+      width:100%;
     }
-    .student-details{
-      font-size:12px;
-      line-height:1.4;
-    }
+
     .student-details .chip{
-      padding:2px 8px;
-      font-size:10px;
-      margin:2px 0;
+      display:block;
+      margin:3px 0;
+      margin-right:0;
+      padding:3px 8px;
+      font-size:11px;
     }
+
+    .avatar{
+      width:52px;
+      height:52px;
+      font-size:18px;
+      flex-shrink:0;
+    }
+
+    .student-name{
+      font-size:17px;
+      margin-bottom:3px;
+    }
+
+    .student-details{
+      font-size:13px;
+      line-height:1.5;
+    }
+
     .reg-box{
       width:100%;
-      padding:10px 12px;
+      text-align:center;
+      padding:12px 14px;
       font-size:13px;
       letter-spacing:0.5px;
+      margin-top:4px;
     }
-    
-    /* Mobile Summary Grid (Small) */
+
+    /* Mobile Summary Grid - 2 Column */
     .summary{
+      grid-template-columns:repeat(2,1fr);
+      gap:12px;
+      margin-top:12px;
+    }
+
+    .box{
+      padding:16px 12px;
+      border-radius:12px;
+    }
+
+    .num{
+      font-size:32px;
+      margin-bottom:6px;
+    }
+
+    .label{
+      font-size:12px;
+      letter-spacing:0;
+    }
+
+    /* ===== MOBILE DROPDOWN - BOTTOM MODAL STYLE ===== */
+    .btn-group.dropright{
+      margin:16px 0;
+      width:100%;
+      position:static;
+    }
+
+    .dropdown-toggle{
+      width:100%;
+      padding:14px 16px;
+      font-size:15px;
+      gap:10px;
+      border-radius:12px;
+      min-width:unset;
+      justify-content:space-between;
+    }
+
+    .dropdown-toggle::after{
+      border-top:5px solid transparent;
+      border-bottom:5px solid transparent;
+      border-left:6px solid #fff;
+    }
+
+    /* Mobile Dropdown Menu - Bottom Sheet Modal */
+    .btn-group.dropright .dropdown-menu{
+      position:fixed;
+      bottom:-100%;
+      left:0;
+      right:0;
+      width:100%;
+      margin-left:0;
+      max-height:60vh;
+      border-radius:24px 24px 0 0;
+      padding:12px;
+      box-shadow:0 -4px 20px rgba(15,23,42,.15);
+      z-index:1000;
+      display:none;
+      flex-direction:column;
+      gap:4px;
+      animation:slideUp .3s cubic-bezier(0.32, 0.72, 0.3, 1) forwards;
+    }
+
+    /* Slide Up Animation */
+    @keyframes slideUp{
+      from{
+        bottom:-100%;
+        opacity:0;
+      }
+      to{
+        bottom:0;
+        opacity:1;
+      }
+    }
+
+    /* Mobile Dropdown Menu Show */
+    .btn-group.dropright.show .dropdown-menu{
+      display:flex;
+    }
+
+    /* Mobile Dropdown Item */
+    .dropdown-item{
+      padding:14px 12px;
+      font-size:14px;
+      margin:3px 0;
+      border-radius:10px;
+    }
+
+    /* Mobile Dropdown Item Active */
+    .dropdown-item:active{
+      background:var(--blue-soft);
+      color:var(--primary);
+    }
+
+    /* Mobile Attendance Grid - 2 Column */
+    .grid{
       grid-template-columns:repeat(2,1fr);
       gap:10px;
       margin-top:12px;
     }
-    .box{
-      padding:14px 10px;
+
+    .slot{
+      padding:16px 12px;
       border-radius:12px;
+      border-width:1.2px;
     }
-    .num{
-      font-size:28px;
+
+    .time{
+      font-size:11px;
       margin-bottom:6px;
     }
+
+    .status{
+      font-size:30px;
+      margin-bottom:4px;
+    }
+
+    .word{
+      font-size:12px;
+    }
+  }
+
+  /* ===== SMALL MOBILE (480px and below) ===== */
+  @media (max-width:480px){
+    body{
+      padding:12px 10px 40px;
+    }
+
+    .container{
+      max-width:100%;
+    }
+
+    .title{
+      margin:0 0 20px;
+    }
+
+    .title h1{
+      font-size:28px;
+      letter-spacing:-0.5px;
+    }
+
+    .title p{
+      font-size:13px;
+      margin-top:6px;
+    }
+
+    .card{
+      padding:14px;
+      margin-bottom:12px;
+    }
+
+    input{
+      padding:14px 14px 14px 44px;
+      font-size:15px;
+      border-radius:11px;
+    }
+
+    .input-wrap svg{
+      width:18px;
+      height:18px;
+      left:12px;
+    }
+
+    #error{
+      margin-top:10px;
+      padding:10px 12px;
+      font-size:13px;
+      border-radius:10px;
+    }
+
+    .clear-btn{
+      width:100%;
+      padding:10px 12px;
+      font-size:13px;
+      border-radius:10px;
+      margin-top:10px;
+    }
+
+    /* Small Mobile Student Card */
+    .student-card{
+      padding:12px;
+      gap:10px;
+    }
+
+    .student-left{
+      gap:12px;
+    }
+
+    .avatar{
+      width:48px;
+      height:48px;
+      font-size:17px;
+    }
+
+    .student-name{
+      font-size:16px;
+      margin-bottom:2px;
+    }
+
+    .student-details{
+      font-size:12px;
+      line-height:1.4;
+    }
+
+    .student-details .chip{
+      padding:2px 7px;
+      font-size:10px;
+      margin:2px 0;
+    }
+
+    .reg-box{
+      width:100%;
+      padding:10px 12px;
+      font-size:12px;
+      letter-spacing:0.3px;
+    }
+
+    /* Small Mobile Summary Grid */
+    .summary{
+      grid-template-columns:repeat(2,1fr);
+      gap:10px;
+      margin-top:10px;
+    }
+
+    .box{
+      padding:12px 8px;
+      border-radius:10px;
+    }
+
+    .num{
+      font-size:26px;
+      margin-bottom:4px;
+    }
+
     .label{
-      font-size:11px;
+      font-size:10px;
       letter-spacing:0;
     }
-    
-    /* Mobile Dropdown (Small) */
+
+    /* Small Mobile Dropdown */
     .btn-group.dropright{
       margin:12px 0;
       width:100%;
     }
+
     .dropdown-toggle{
       width:100%;
       padding:12px 14px;
       font-size:14px;
       gap:8px;
-      border-radius:12px;
+      border-radius:11px;
+      min-width:unset;
     }
+
     .dropdown-toggle::after{
       border-top:4px solid transparent;
       border-bottom:4px solid transparent;
       border-left:5px solid #fff;
     }
+
+    /* Small Mobile Dropdown Menu */
     .btn-group.dropright .dropdown-menu{
-      max-height:45vh;
+      max-height:50vh;
       border-radius:20px 20px 0 0;
+      padding:8px;
     }
+
+    /* Small Mobile Dropdown Item */
     .dropdown-item{
       padding:12px 10px;
       font-size:13px;
-      margin:1px 3px;
+      margin:2px 0;
       border-radius:8px;
     }
-    
-    /* Mobile Attendance Grid (Small) */
+
+    /* Small Mobile Attendance Grid */
     .grid{
       grid-template-columns:repeat(2,1fr);
       gap:8px;
-      margin-top:12px;
+      margin-top:10px;
     }
+
     .slot{
-      padding:14px 10px;
+      padding:12px 10px;
       border-radius:10px;
-      border-width:1.2px;
+      border-width:1px;
     }
+
     .time{
-      font-size:11px;
-      margin-bottom:6px;
+      font-size:10px;
+      margin-bottom:5px;
     }
+
     .status{
-      font-size:28px;
-      margin-bottom:3px;
+      font-size:26px;
+      margin-bottom:2px;
     }
+
     .word{
-      font-size:11px;
+      font-size:10px;
     }
   }
 </style>
@@ -521,6 +1096,7 @@
       <p>11.05.2026 — 23.05.2026</p>
     </div>
 
+    <!-- Search Input Card -->
     <div class="card">
       <div class="input-wrap">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
@@ -530,12 +1106,16 @@
       <div id="error">⚠ Student Not Found — please check your registration number.</div>
     </div>
 
+    <!-- Results Card (Hidden by default) -->
     <div id="result">
       <div class="card">
+        <!-- Student Info Card -->
         <div id="studentInfo"></div>
+
+        <!-- Summary Statistics -->
         <div id="summary" class="summary"></div>
 
-        <!-- Bootstrap-style dropright - MOBILE OPTIMIZED -->
+        <!-- Date Dropdown: Desktop (Right-Positioned), Mobile (Bottom Modal) -->
         <div class="btn-group dropright" id="dateDropdown">
           <button type="button" class="dropdown-toggle" onclick="toggleDropdown(event)" aria-haspopup="true" aria-expanded="false">
             <span id="selectedDate">23.05.2026</span>
@@ -543,28 +1123,37 @@
           <div class="dropdown-menu" id="dropdownMenu"></div>
         </div>
 
+        <!-- Attendance Grid -->
         <div id="attendanceGrid" class="grid"></div>
       </div>
     </div>
   </div>
 
 <script>
+  // ===== DATA STORAGE AND STATE =====
   let allData = {};
   let currentReg = "";
   let currentDate = "";
 
+  // Define attendance dates
   const dates = ["11","12","13","14","15","16","18","19","20","21","22","23"]
     .map(d => `${d}.05.2026`);
 
+  // Fetch attendance data from GitHub repository
   Promise.all(
     dates.map(d =>
       fetch(`https://raw.githubusercontent.com/studentsofklu/crt-attendances/main/Y23%20CRT%20Attendance%20(${d}).json`)
         .then(r => r.json())
     )
   ).then(data => {
-    dates.forEach((d, i) => { allData[d] = data[i].slice(2); });
+    // Store data for each date
+    dates.forEach((d, i) => { 
+      allData[d] = data[i].slice(2); 
+    });
   });
 
+  // ===== INPUT EVENT LISTENER =====
+  // Listen for input changes and trigger search
   document.getElementById("regInput").addEventListener("input", function () {
     let regNo = this.value.trim();
     if (regNo.length === 10) {
@@ -576,6 +1165,8 @@
     }
   });
 
+  // ===== CLEAR DATA FUNCTION =====
+  // Clear input and reset display
   function clearData() {
     document.getElementById("regInput").value = "";
     document.getElementById("result").style.display = "none";
@@ -584,14 +1175,19 @@
     document.getElementById("regInput").focus();
   }
 
+  // ===== SEARCH STUDENT FUNCTION =====
+  // Search for student in attendance data
   function searchStudent() {
     let regNo = document.getElementById("regInput").value.trim();
     let student = null;
+    
+    // Search through all dates for the student
     Object.keys(allData).forEach(date => {
       let found = allData[date].find(item => item["__EMPTY_6"] == regNo);
       if (found) student = found;
     });
 
+    // Show error if not found
     if (!student) {
       document.getElementById("error").style.display = "block";
       document.getElementById("result").style.display = "none";
@@ -599,17 +1195,23 @@
       return;
     }
 
+    // Show results if found
     document.getElementById("error").style.display = "none";
     document.getElementById("result").style.display = "block";
     document.getElementById("clearBtn").style.display = "inline-block";
 
+    // Set current student and get last date
     currentReg = regNo;
     let lastDate = Object.keys(allData).pop();
     currentDate = lastDate;
+    
+    // Create dropdown and show attendance
     createDayButtons(regNo);
     showAttendance(lastDate, regNo);
   }
 
+  // ===== CREATE DROPDOWN ITEMS =====
+  // Create dropdown menu items for date selection
   function createDayButtons(regNo) {
     let html = "";
     Object.keys(allData).forEach(date => {
@@ -618,11 +1220,33 @@
     document.getElementById("dropdownMenu").innerHTML = html;
   }
 
+  // ===== TOGGLE DROPDOWN FUNCTION =====
+  // Toggle dropdown menu visibility
   function toggleDropdown(e) {
     if(e) e.stopPropagation();
-    document.getElementById("dateDropdown").classList.toggle("show");
+    let dropdown = document.getElementById("dateDropdown");
+    dropdown.classList.toggle("show");
+    
+    // Setup event listener for closing dropdown when clicking outside
+    if(dropdown.classList.contains("show")) {
+      setTimeout(() => {
+        document.addEventListener("click", closeDropdownOnClickOutside);
+      }, 0);
+    }
   }
 
+  // ===== CLOSE DROPDOWN ON CLICK OUTSIDE =====
+  // Close dropdown when clicking outside
+  function closeDropdownOnClickOutside(e) {
+    let dropdown = document.getElementById("dateDropdown");
+    if (!e.target.closest('#dateDropdown')) {
+      dropdown.classList.remove("show");
+      document.removeEventListener("click", closeDropdownOnClickOutside);
+    }
+  }
+
+  // ===== SELECT DATE FUNCTION =====
+  // Handle date selection from dropdown
   function selectDate(date, regNo) {
     currentDate = date;
     document.getElementById("selectedDate").innerText = date;
@@ -631,21 +1255,21 @@
     showAttendance(date, regNo);
   }
 
-  window.addEventListener("click", function (e) {
-    if (!e.target.closest('#dateDropdown')) {
-      document.getElementById("dateDropdown")?.classList.remove("show");
-    }
-  });
-
+  // ===== SHOW ATTENDANCE FUNCTION =====
+  // Display attendance for selected date
   function showAttendance(date, regNo) {
     let student = allData[date].find(item => item["__EMPTY_6"] == regNo);
     let html = "";
+    
+    // Time slots for each class
     let timings = [
       "09:20 - 10:10","10:10 - 11:00","11:10 - 12:00","12:00 - 12:50",
       "01:50 - 02:40","02:40 - 03:40","03:50 - 04:30","04:30 - 05:30"
     ];
 
+    // Generate attendance slots for each time period
     if (!student) {
+      // If student not found for this date, show all absent
       for (let i = 0; i < 8; i++) {
         html += `
           <div class="slot absent">
@@ -655,6 +1279,7 @@
           </div>`;
       }
     } else {
+      // Build slots from student attendance data
       let slots = [
         [timings[0], student["3"]],
         [timings[1], student["4"]],
@@ -665,6 +1290,8 @@
         [timings[6], student["10"]],
         [timings[7], student["11"]]
       ];
+      
+      // Render each slot
       slots.forEach(item => {
         let [time, status] = item;
         html += `
@@ -677,27 +1304,35 @@
     }
     document.getElementById("attendanceGrid").innerHTML = html;
 
-    // Overall stats across all dates
+    // ===== CALCULATE OVERALL STATISTICS =====
     let overallPresent = 0, overallTotal = 0;
+    
+    // Count across all dates
     Object.keys(allData).forEach(day => {
       let stu = allData[day].find(item => item["__EMPTY_6"] == regNo);
       if (stu) {
+        // Count present classes
         ["3","4","5","7","8","9","10","11"].forEach(k => {
           if (stu[k] == "P") overallPresent++;
           overallTotal++;
         });
       } else {
+        // If not in this date, count as absent
         overallTotal += 8;
       }
     });
 
     let overallAbsent = overallTotal - overallPresent;
     let overallPercentage = ((overallPresent / overallTotal) * 100).toFixed(0);
+    
+    // Calculate classes needed for 85% attendance
     let required = Math.ceil((0.85 * overallTotal - overallPresent) / (1 - 0.85));
     let classesNeeded = required > 0 ? required : 0;
 
-    // Profile info: prefer the SELECTED date's record
+    // ===== GET STUDENT PROFILE INFO =====
     let infoStudent = student;
+    
+    // Fallback to any record with name if current date has no entry
     if (!infoStudent || !infoStudent["__EMPTY"]) {
       Object.keys(allData).forEach(day => {
         let stu = allData[day].find(item => item["__EMPTY_6"] == regNo);
@@ -705,6 +1340,7 @@
       });
     }
 
+    // Extract student information
     const name    = infoStudent["__EMPTY"]   || "—";
     const branch  = infoStudent["__EMPTY_1"] || "—";
     const section = infoStudent["__EMPTY_3"] || infoStudent["__EMPTY_2"] || "—";
@@ -712,6 +1348,7 @@
     const crtRoom = infoStudent["__EMPTY_5"] || "—";
     const reg     = infoStudent["__EMPTY_6"] || regNo;
 
+    // ===== RENDER STUDENT INFORMATION CARD =====
     document.getElementById("studentInfo").innerHTML = `
       <div class="student-card">
         <div class="student-left">
@@ -734,6 +1371,7 @@
       </div>
     `;
 
+    // ===== RENDER SUMMARY STATISTICS =====
     document.getElementById("summary").innerHTML = `
       <div class="box">
         <div class="num" style="color:#2563eb;">${overallTotal}</div>
