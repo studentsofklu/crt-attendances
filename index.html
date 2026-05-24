@@ -1,521 +1,476 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>CRT Attendance Portal</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
 <style>
-
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:'Inter',sans-serif;
-}
-
-body{
-    background:#f4f5f7;
-    color:#111827;
+  :root{
+    --bg:#f6f8fb;
+    --bg-grad:radial-gradient(1200px 600px at 10% -10%, #e0e7ff 0%, transparent 60%),
+              radial-gradient(900px 500px at 100% 0%, #dcfce7 0%, transparent 55%),
+              linear-gradient(180deg,#f6f8fb 0%, #eef2f7 100%);
+    --card:#ffffff;
+    --border:#e5e9f0;
+    --text:#0b1220;
+    --muted:#64748b;
+    --primary:#2563eb;
+    --primary-dark:#1d4ed8;
+    --green:#16a34a;
+    --green-soft:#ecfdf5;
+    --red:#dc2626;
+    --red-soft:#fef2f2;
+    --blue-soft:#eff6ff;
+    --shadow-sm:0 1px 2px rgba(15,23,42,.04), 0 1px 3px rgba(15,23,42,.06);
+    --shadow-md:0 4px 14px rgba(15,23,42,.06), 0 2px 6px rgba(15,23,42,.04);
+    --shadow-lg:0 20px 40px -20px rgba(37,99,235,.25), 0 10px 20px -10px rgba(15,23,42,.1);
+    --radius:18px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;font-family:'Inter',system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;}
+  html,body{height:100%;}
+  body{
+    background:var(--bg);
+    background-image:var(--bg-grad);
     min-height:100vh;
-    padding:25px 15px;
-}
+    color:var(--text);
+    padding:24px 16px 48px;
+    -webkit-font-smoothing:antialiased;
+  }
+  .container{max-width:1240px;margin:auto;}
 
-.container{
-    max-width:900px;
-    margin:auto;
-}
+  /* Header */
+  .title{text-align:center;margin:8px 0 28px;}
+  .badge{
+    display:inline-flex;align-items:center;gap:8px;
+    padding:6px 14px;border-radius:999px;
+    background:rgba(37,99,235,.08);color:var(--primary);
+    font-weight:600;font-size:13px;letter-spacing:.3px;
+    border:1px solid rgba(37,99,235,.15);
+    margin-bottom:14px;
+  }
+  .badge::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--primary);box-shadow:0 0 0 4px rgba(37,99,235,.15);}
+  .title h1{
+    font-size:clamp(28px,4.2vw,44px);
+    color:var(--text);font-weight:800;letter-spacing:-1px;
+    background:linear-gradient(90deg,#0b1220,#2563eb);
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+  }
+  .title p{margin-top:8px;font-size:16px;color:var(--muted);font-weight:500;}
 
-.header{
-    text-align:center;
-    margin-bottom:25px;
-}
-
-.header h1{
-    font-size:28px;
-    margin-bottom:5px;
-}
-
-.header p{
-    color:#6b7280;
-    font-size:14px;
-}
-
-.card{
-    background:white;
-    border-radius:12px;
-    padding:20px;
+  /* Card */
+  .card{
+    background:var(--card);
+    padding:22px;
+    border-radius:var(--radius);
+    box-shadow:var(--shadow-md);
+    border:1px solid var(--border);
     margin-bottom:20px;
-    border:1px solid #e5e7eb;
-}
+  }
 
-.search-box{
-    display:flex;
-    gap:10px;
-}
+  /* Input */
+  .input-wrap{position:relative;}
+  .input-wrap svg{
+    position:absolute;left:18px;top:50%;transform:translateY(-50%);
+    width:22px;height:22px;color:var(--muted);pointer-events:none;
+  }
+  input{
+    width:100%;
+    padding:18px 18px 18px 52px;
+    font-size:18px;font-weight:500;
+    border:2px solid var(--border);
+    border-radius:14px;
+    outline:none;
+    background:#fafbfd;
+    transition:all .2s ease;
+    color:var(--text);
+    letter-spacing:.5px;
+  }
+  input::placeholder{color:#94a3b8;font-weight:500;letter-spacing:.3px;}
+  input:focus{border-color:var(--primary);background:#fff;box-shadow:0 0 0 4px rgba(37,99,235,.12);}
 
-input{
-    flex:1;
-    padding:12px;
-    border:1px solid #d1d5db;
-    border-radius:8px;
-    font-size:15px;
-}
+  .clear-btn{
+    margin-top:14px;padding:12px 22px;
+    background:#fff;color:var(--red);
+    border:1.5px solid var(--red);
+    border-radius:12px;font-size:15px;font-weight:600;
+    cursor:pointer;display:none;transition:.2s;
+  }
+  .clear-btn:hover{background:var(--red);color:#fff;}
 
-button{
-    background:#111827;
-    color:white;
-    border:none;
-    border-radius:8px;
-    padding:12px 20px;
-    cursor:pointer;
-    font-size:14px;
-    font-weight:600;
-}
+  #error{
+    margin-top:14px;padding:12px 16px;
+    background:var(--red-soft);color:var(--red);
+    border:1px solid #fecaca;border-radius:12px;
+    font-size:15px;font-weight:600;display:none;
+  }
 
-button:hover{
-    background:#1f2937;
-}
+  #result{display:none;animation:fadeIn .4s ease;}
+  @keyframes fadeIn{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:none;}}
 
-#error{
-    color:red;
-    margin-top:10px;
-    display:none;
-}
+  /* Student card */
+  .student-card{
+    background:linear-gradient(135deg,#ffffff 0%,#f8fafc 100%);
+    border:1px solid var(--border);
+    border-radius:var(--radius);
+    padding:22px;
+    display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;
+  }
+  .student-left{display:flex;align-items:center;gap:18px;flex-wrap:wrap;}
+  .avatar{
+    width:64px;height:64px;border-radius:50%;
+    background:linear-gradient(135deg,#2563eb,#7c3aed);
+    display:flex;align-items:center;justify-content:center;
+    font-size:22px;font-weight:700;color:#fff;
+    box-shadow:0 8px 20px rgba(37,99,235,.3);
+    letter-spacing:.5px;
+  }
+  .student-name{font-size:20px;font-weight:700;color:var(--text);margin-bottom:4px;letter-spacing:-.2px;}
+  .student-details{font-size:14px;color:var(--muted);font-weight:500;line-height:1.6;}
+  .student-details .chip{
+    display:inline-block;padding:2px 10px;border-radius:999px;
+    background:var(--blue-soft);color:var(--primary);font-weight:600;font-size:12px;margin-right:6px;
+  }
+  .progress-container{display:flex;align-items:center;gap:12px;margin-top:14px;}
+  .progress-bar{width:300px;max-width:60vw;height:8px;background:#e2e8f0;border-radius:20px;overflow:hidden;}
+  .progress-fill{height:100%;background:linear-gradient(90deg,#16a34a,#22c55e);border-radius:20px;transition:width .8s ease;}
+  .progress-text{font-size:16px;font-weight:700;color:var(--green);}
+  .reg-box{
+    background:#0b1220;color:#fff;
+    padding:14px 22px;border-radius:12px;
+    font-size:16px;font-weight:700;letter-spacing:1px;
+    font-family:'JetBrains Mono',ui-monospace,monospace;
+  }
 
-#loading{
-    color:#2563eb;
-    margin-top:10px;
-}
+  /* Summary */
+  .summary{
+    margin-top:18px;
+    display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:14px;
+  }
+  .box{
+    background:#fff;border:1px solid var(--border);
+    border-radius:var(--radius);
+    padding:24px 18px;text-align:center;
+    transition:.25s;box-shadow:var(--shadow-sm);
+    position:relative;overflow:hidden;
+  }
+  .box::before{
+    content:"";position:absolute;inset:0 0 auto 0;height:3px;
+    background:linear-gradient(90deg,#2563eb,#7c3aed);opacity:0;transition:.25s;
+  }
+  .box:hover{transform:translateY(-3px);box-shadow:var(--shadow-md);}
+  .box:hover::before{opacity:1;}
+  .num{font-size:44px;font-weight:800;line-height:1;letter-spacing:-1.5px;margin-bottom:10px;}
+  .green{color:var(--green);}
+  .red{color:var(--red);}
+  .blue{color:var(--primary);}
+  .label{font-size:14px;font-weight:600;color:var(--muted);letter-spacing:.3px;text-transform:uppercase;}
 
-#result{
-    display:none;
-}
+  /* Dropright (Bootstrap-style) */
+  .btn-group.dropright{
+    position:relative;display:inline-flex;margin:24px 0;
+  }
+  .dropdown-toggle{
+    padding:14px 22px;border:none;border-radius:14px;
+    background:linear-gradient(135deg,var(--primary),var(--primary-dark));
+    color:#fff;font-size:16px;font-weight:600;cursor:pointer;
+    display:inline-flex;align-items:center;gap:14px;
+    box-shadow:var(--shadow-lg);transition:.2s;min-width:240px;justify-content:space-between;
+  }
+  .dropdown-toggle:hover{transform:translateY(-1px);}
+  .dropdown-toggle::after{
+    content:"";display:inline-block;
+    width:0;height:0;margin-left:6px;
+    border-top:6px solid transparent;
+    border-bottom:6px solid transparent;
+    border-left:7px solid #fff;
+    transition:transform .25s;
+  }
+  .btn-group.dropright.show .dropdown-toggle::after{transform:rotate(90deg);}
+  .btn-group.dropright .dropdown-menu{
+    position:absolute;top:0;left:100%;margin-left:10px;
+    min-width:200px;background:#fff;border:1px solid var(--border);
+    border-radius:14px;padding:6px;display:none;flex-direction:column;gap:2px;
+    box-shadow:0 20px 40px rgba(15,23,42,.12);
+    z-index:100;max-height:340px;overflow-y:auto;
+  }
+  .btn-group.dropright.show .dropdown-menu{display:flex;}
+  .dropdown-item{
+    padding:12px 14px;border-radius:10px;cursor:pointer;
+    font-size:14px;font-weight:600;transition:.15s;color:var(--text);
+  }
+  .dropdown-item:hover,.dropdown-item.active{background:var(--blue-soft);color:var(--primary);}
 
-.student-name{
-    font-size:24px;
-    font-weight:700;
-    margin-bottom:5px;
-}
+  /* Slots */
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:14px;}
+  .slot{
+    padding:20px 16px;border-radius:14px;text-align:center;
+    border:1.5px solid;transition:.2s;
+  }
+  .slot:hover{transform:translateY(-2px);box-shadow:var(--shadow-sm);}
+  .present{background:var(--green-soft);border-color:#86efac;}
+  .absent{background:var(--red-soft);border-color:#fca5a5;}
+  .time{font-size:13px;color:var(--muted);margin-bottom:10px;font-weight:600;letter-spacing:.3px;}
+  .status{font-size:36px;font-weight:800;margin-bottom:6px;letter-spacing:-1px;}
+  .present .status{color:var(--green);}
+  .absent .status{color:var(--red);}
+  .word{font-size:14px;font-weight:700;color:var(--text);text-transform:uppercase;letter-spacing:.5px;}
 
-.student-reg{
-    color:#6b7280;
-    margin-bottom:20px;
-}
-
-.info-grid{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
-    gap:10px;
-}
-
-.info-box{
-    background:#f9fafb;
-    border:1px solid #e5e7eb;
-    border-radius:10px;
-    padding:12px;
-}
-
-.label{
-    font-size:11px;
-    color:#9ca3af;
-    text-transform:uppercase;
-    margin-bottom:5px;
-    font-weight:700;
-}
-
-.value{
-    font-size:15px;
-    font-weight:600;
-}
-
-.tabs{
-    display:flex;
-    gap:8px;
-    flex-wrap:wrap;
-    margin-top:20px;
-}
-
-.tab{
-    padding:8px 14px;
-    border-radius:8px;
-    border:1px solid #d1d5db;
-    background:white;
-    cursor:pointer;
-    font-size:13px;
-    font-weight:600;
-}
-
-.tab.active{
-    background:#111827;
-    color:white;
-}
-
-.slots{
-    margin-top:20px;
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(140px,1fr));
-    gap:10px;
-}
-
-.slot{
-    border-radius:10px;
-    padding:15px;
-    text-align:center;
-    border:1px solid;
-}
-
-.present{
-    background:#f0fdf4;
-    border-color:#bbf7d0;
-}
-
-.absent{
-    background:#fef2f2;
-    border-color:#fecaca;
-}
-
-.time{
-    font-size:12px;
-    color:#6b7280;
-    margin-bottom:8px;
-}
-
-.status{
-    font-size:22px;
-    font-weight:700;
-}
-
-.present .status{
-    color:#16a34a;
-}
-
-.absent .status{
-    color:#dc2626;
-}
-
-.word{
-    font-size:12px;
-    margin-top:5px;
-    font-weight:600;
-}
-
-.summary{
-    margin-top:20px;
-    display:flex;
-    gap:20px;
-    flex-wrap:wrap;
-}
-
-.sum-box{
-    flex:1;
-    min-width:120px;
-    background:#f9fafb;
-    border-radius:10px;
-    padding:15px;
-    text-align:center;
-    border:1px solid #e5e7eb;
-}
-
-.sum-num{
-    font-size:28px;
-    font-weight:700;
-}
-
-.green{
-    color:#16a34a;
-}
-
-.red{
-    color:#dc2626;
-}
-
-.blue{
-    color:#2563eb;
-}
-
+  @media (max-width:640px){
+    .reg-box{width:100%;text-align:center;}
+    .progress-bar{width:240px;}
+    .num{font-size:36px;}
+    .btn-group.dropright .dropdown-menu{
+      position:static;margin-left:0;margin-top:8px;width:100%;
+    }
+    .btn-group.dropright{width:100%;}
+    .dropdown-toggle{width:100%;}
+  }
 </style>
-
 </head>
-
 <body>
+  <div class="container">
+    <div class="title">
+     
+      <h1>CRT Attendance Portal</h1>
+      <p>11.05.2026 — 23.05.2026</p>
+    </div>
 
-<div class="container">
+    <div class="card">
+      <div class="input-wrap">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+        <input type="tel" id="regInput" placeholder="Enter your Registration Number" maxlength="10" />
+      </div>
+      <button class="clear-btn" id="clearBtn" onclick="clearData()">Clear</button>
+      <div id="error">⚠ Student Not Found — please check your registration number.</div>
+    </div>
 
-<div class="header">
+    <div id="result">
+      <div class="card">
+        <div id="studentInfo"></div>
+        <div id="summary" class="summary"></div>
 
-<h1>CRT Attendance Portal</h1>
+        <!-- Bootstrap-style dropright -->
+        <div class="btn-group dropright" id="dateDropdown">
+          <button type="button" class="dropdown-toggle" onclick="toggleDropdown(event)" aria-haspopup="true" aria-expanded="false">
+            <span id="selectedDate">23.05.2026</span>
+          </button>
+          <div class="dropdown-menu" id="dropdownMenu"></div>
+        </div>
 
-<p>Y23 CRT Summer Training Attendance</p>
-
-</div>
-
-<div class="card">
-
-<div class="search-box">
-
-<input
-type="text"
-id="regInput"
-placeholder="Enter REGD.NO">
-
-<button onclick="doSearch()">
-Search
-</button>
-
-</div>
-
-<div id="loading">
-Loading attendance data...
-</div>
-
-<div id="error">
-Student Not Found
-</div>
-
-</div>
-
-<div id="result">
-
-<div class="card">
-
-<div class="student-name" id="studentName"></div>
-
-<div class="student-reg" id="studentReg"></div>
-
-<div class="info-grid" id="infoGrid"></div>
-
-</div>
-
-<div class="card">
-
-<h3>Attendance</h3>
-
-<div class="tabs" id="tabs"></div>
-
-<div class="slots" id="slots"></div>
-
-<div class="summary" id="summary"></div>
-
-</div>
-
-</div>
-
-</div>
+        <div id="attendanceGrid" class="grid"></div>
+      </div>
+    </div>
+  </div>
 
 <script>
+  let allData = {};
+  let currentReg = "";
+  let currentDate = "";
 
-let DATA = [];
+  const dates = ["11","12","13","14","15","16","18","19","20","21","22","23"]
+    .map(d => `${d}.05.2026`);
 
-fetch("data.json")
+  Promise.all(
+    dates.map(d =>
+      fetch(`https://raw.githubusercontent.com/studentsofklu/crt-attendances/main/Y23%20CRT%20Attendance%20(${d}).json`)
+        .then(r => r.json())
+    )
+  ).then(data => {
+    dates.forEach((d, i) => { allData[d] = data[i].slice(2); });
+  });
 
-.then(res => res.json())
-
-.then(data => {
-
-    DATA = data;
-
-    document.getElementById("loading")
-    .innerHTML = "Data Loaded Successfully";
-
-})
-
-.catch(err => {
-
-    document.getElementById("loading")
-    .innerHTML = "Error Loading Data";
-
-    console.log(err);
-
-});
-
-function doSearch(){
-
-    let regNo =
-    document.getElementById("regInput")
-    .value
-    .trim();
-
-    let student =
-    DATA.find(s => s["REGD.NO"] == regNo);
-
-    if(!student){
-
-        document.getElementById("error")
-        .style.display = "block";
-
-        document.getElementById("result")
-        .style.display = "none";
-
-        return;
-
+  document.getElementById("regInput").addEventListener("input", function () {
+    let regNo = this.value.trim();
+    if (regNo.length === 10) {
+      searchStudent();
+    } else {
+      document.getElementById("result").style.display = "none";
+      document.getElementById("error").style.display = "none";
+      document.getElementById("clearBtn").style.display = "none";
     }
+  });
 
-    document.getElementById("error")
-    .style.display = "none";
+  function clearData() {
+    document.getElementById("regInput").value = "";
+    document.getElementById("result").style.display = "none";
+    document.getElementById("error").style.display = "none";
+    document.getElementById("clearBtn").style.display = "none";
+    document.getElementById("regInput").focus();
+  }
 
-    document.getElementById("result")
-    .style.display = "block";
-
-    document.getElementById("studentName")
-    .innerHTML = student.NAME;
-
-    document.getElementById("studentReg")
-    .innerHTML = student["REGD.NO"];
-
-    document.getElementById("infoGrid")
-    .innerHTML = `
-
-    <div class="info-box">
-      <div class="label">Branch</div>
-      <div class="value">${student.BRANCH}</div>
-    </div>
-
-    <div class="info-box">
-      <div class="label">CRT SEC</div>
-      <div class="value">${student["CRT SEC"]}</div>
-    </div>
-
-    <div class="info-box">
-      <div class="label">Room</div>
-      <div class="value">${student["CRT ROOM"]}</div>
-    </div>
-
-    `;
-
-    let dates =
-    Object.keys(student.dates);
-
-    let tabs =
-    document.getElementById("tabs");
-
-    tabs.innerHTML = "";
-
-    dates.forEach((date,index)=>{
-
-        tabs.innerHTML += `
-
-        <button
-        class="tab ${index==0?'active':''}"
-        onclick="showDate('${date}',this)">
-        ${date}
-        </button>
-
-        `;
-
+  function searchStudent() {
+    let regNo = document.getElementById("regInput").value.trim();
+    let student = null;
+    Object.keys(allData).forEach(date => {
+      let found = allData[date].find(item => item["__EMPTY_6"] == regNo);
+      if (found) student = found;
     });
 
-    window.currentStudent = student;
-
-    showDate(dates[0]);
-
-}
-
-function showDate(date,btn){
-
-    if(btn){
-
-        document
-        .querySelectorAll(".tab")
-        .forEach(t=>t.classList.remove("active"));
-
-        btn.classList.add("active");
-
+    if (!student) {
+      document.getElementById("error").style.display = "block";
+      document.getElementById("result").style.display = "none";
+      document.getElementById("clearBtn").style.display = "inline-block";
+      return;
     }
 
-    let slots =
-    window.currentStudent.dates[date];
+    document.getElementById("error").style.display = "none";
+    document.getElementById("result").style.display = "block";
+    document.getElementById("clearBtn").style.display = "inline-block";
 
-    let slotsHTML = "";
+    currentReg = regNo;
+    let lastDate = Object.keys(allData).pop();
+    currentDate = lastDate;
+    createDayButtons(regNo);
+    showAttendance(lastDate, regNo);
+  }
 
-    let present = 0;
-    let absent = 0;
+  function createDayButtons(regNo) {
+    let html = "";
+    Object.keys(allData).forEach(date => {
+      html += `<div class="dropdown-item ${date===currentDate?'active':''}" data-date="${date}" onclick="selectDate('${date}','${regNo}')">${date}</div>`;
+    });
+    document.getElementById("dropdownMenu").innerHTML = html;
+  }
 
-    Object.entries(slots)
-    .forEach(([time,status])=>{
+  function toggleDropdown(e) {
+    if(e) e.stopPropagation();
+    document.getElementById("dateDropdown").classList.toggle("show");
+  }
 
-        if(status=="P"){
-            present++;
-        }
-        else{
-            absent++;
-        }
+  function selectDate(date, regNo) {
+    currentDate = date;
+    document.getElementById("selectedDate").innerText = date;
+    document.getElementById("dateDropdown").classList.remove("show");
+    createDayButtons(regNo);
+    showAttendance(date, regNo);
+  }
 
-        slotsHTML += `
+  window.addEventListener("click", function (e) {
+    if (!e.target.closest('#dateDropdown')) {
+      document.getElementById("dateDropdown")?.classList.remove("show");
+    }
+  });
 
-        <div class="slot ${status=="P"?"present":"absent"}">
+  function showAttendance(date, regNo) {
+    let student = allData[date].find(item => item["__EMPTY_6"] == regNo);
+    let html = "";
+    let timings = [
+      "09:20 - 10:10","10:10 - 11:00","11:10 - 12:00","12:00 - 12:50",
+      "01:50 - 02:40","02:40 - 03:40","03:50 - 04:30","04:30 - 05:30"
+    ];
 
-        <div class="time">
-        ${time}
-        </div>
+    if (!student) {
+      for (let i = 0; i < 8; i++) {
+        html += `
+          <div class="slot absent">
+            <div class="time">${timings[i]}</div>
+            <div class="status">A</div>
+            <div class="word">Absent</div>
+          </div>`;
+      }
+    } else {
+      let slots = [
+        [timings[0], student["3"]],
+        [timings[1], student["4"]],
+        [timings[2], student["5"]],
+        [timings[3], student["7"]],
+        [timings[4], student["8"]],
+        [timings[5], student["9"]],
+        [timings[6], student["10"]],
+        [timings[7], student["11"]]
+      ];
+      slots.forEach(item => {
+        let [time, status] = item;
+        html += `
+          <div class="slot ${status == "P" ? "present" : "absent"}">
+            <div class="time">${time}</div>
+            <div class="status">${status}</div>
+            <div class="word">${status == "P" ? "Present" : "Absent"}</div>
+          </div>`;
+      });
+    }
+    document.getElementById("attendanceGrid").innerHTML = html;
 
-        <div class="status">
-        ${status}
-        </div>
-
-        <div class="word">
-        ${status=="P"?"Present":"Absent"}
-        </div>
-
-        </div>
-
-        `;
-
+    // Overall stats across all dates
+    let overallPresent = 0, overallTotal = 0;
+    Object.keys(allData).forEach(day => {
+      let stu = allData[day].find(item => item["__EMPTY_6"] == regNo);
+      if (stu) {
+        ["3","4","5","7","8","9","10","11"].forEach(k => {
+          if (stu[k] == "P") overallPresent++;
+          overallTotal++;
+        });
+      } else {
+        overallTotal += 8;
+      }
     });
 
-    document.getElementById("slots")
-    .innerHTML = slotsHTML;
+    let overallAbsent = overallTotal - overallPresent;
+    let overallPercentage = ((overallPresent / overallTotal) * 100).toFixed(0);
+    let classesNeeded = 18;
 
-    let total =
-    present + absent;
+    // Profile info: prefer the SELECTED date's record (so CRT room reflects that day's sheet).
+    // Fallback to any record with name info if selected day has no entry for this reg.
+    let infoStudent = student;
+    if (!infoStudent || !infoStudent["__EMPTY"]) {
+      Object.keys(allData).forEach(day => {
+        let stu = allData[day].find(item => item["__EMPTY_6"] == regNo);
+        if (stu && stu["__EMPTY"]) infoStudent = stu;
+      });
+    }
 
-    let percentage =
-    ((present/total)*100).toFixed(1);
+    const name    = infoStudent["__EMPTY"]   || "—";
+    const branch  = infoStudent["__EMPTY_1"] || "—";
+    const section = infoStudent["__EMPTY_3"] || infoStudent["__EMPTY_2"] || "—";
+    const crtCode = infoStudent["__EMPTY_4"] || "—";
+    const crtRoom = infoStudent["__EMPTY_5"] || "—";
+    const reg     = infoStudent["__EMPTY_6"] || regNo;
 
-    document.getElementById("summary")
-    .innerHTML = `
+    document.getElementById("studentInfo").innerHTML = `
+      <div class="student-card">
+  <div class="student-left">
 
-    <div class="sum-box">
-
-    <div class="sum-num green">
-    ${present}
+    <div class="avatar">
+      ${name.split(" ").filter(Boolean).map(x => x[0]).slice(0,2).join("").toUpperCase()}
     </div>
 
-    <div>Present</div>
+    <div>
+      <div class="student-name">${name}</div>
 
+      <div class="student-details">
+        <span class="chip">DEP ${infoStudent["__EMPTY_2"] || "—"}</span>
+        <span class="chip">Cluster ${infoStudent["__EMPTY_3"] || "—"}</span>
+        <span class="chip">CRT SEC ${infoStudent["__EMPTY_4"] || "—"}</span>
+        <span class="chip">CRT Room ${infoStudent["__EMPTY_5"] || "—"}</span>
+      </div>
+
+      <div class="progress-container">
+        <div class="progress-bar">
+          <div class="progress-fill" style="width:${overallPercentage}%"></div>
+        </div>
+
+        <div class="progress-text">${overallPercentage}%</div>
+      </div>
     </div>
+  </div>
 
-    <div class="sum-box">
-
-    <div class="sum-num red">
-    ${absent}
-    </div>
-
-    <div>Absent</div>
-
-    </div>
-
-    <div class="sum-box">
-
-    <div class="sum-num blue">
-    ${percentage}%
-    </div>
-
-    <div>Attendance</div>
-
-    </div>
-
+  <div class="reg-box">
+    ${infoStudent["__EMPTY_6"] || "—"}
+  </div>
+</div>
     `;
 
-}
-
+    document.getElementById("summary").innerHTML = `
+      <div class="box"><div class="num blue">${overallTotal}</div><div class="label">Total Classes</div></div>
+      <div class="box"><div class="num green">${overallPresent}</div><div class="label">Present</div></div>
+      <div class="box"><div class="num red">${overallAbsent}</div><div class="label">Absent</div></div>
+      <div class="box"><div class="num blue">${overallPercentage}%</div><div class="label">Attendance</div></div>
+      <div class="box"><div class="num blue">${classesNeeded}</div><div class="label">Classes Needed</div></div>
+    `;
+  }
 </script>
-
 </body>
-
 </html>
