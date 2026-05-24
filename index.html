@@ -458,13 +458,32 @@ let classesNeeded = required > 0 ? required : 0;
 </div>
     `;
 
-    document.getElementById("summary").innerHTML = `
-      <div class="box"><div class="num blue">${overallTotal}</div><div class="label">Total Classes</div></div>
-      <div class="box"><div class="num green">${overallPresent}</div><div class="label">Present</div></div>
-      <div class="box"><div class="num red">${overallAbsent}</div><div class="label">Absent</div></div>
-      <div class="box"><div class="num blue">${overallPercentage}%</div><div class="label">Attendance</div></div>
-      <div class="box"><div class="num blue">${classesNeeded}</div><div class="label">Classes Needed for 85% Attendance</div></div>
-    `;
+document.getElementById("summary").innerHTML = `
+  <div class="box">
+    <div class="num" style="color:#2563eb;">${overallTotal}</div>
+    <div class="label">Total Classes</div>
+  </div>
+
+  <div class="box">
+    <div class="num" style="color:#16a34a;">${overallPresent}</div>
+    <div class="label">Present</div>
+  </div>
+
+  <div class="box">
+    <div class="num" style="color:#dc2626;">${overallAbsent}</div>
+    <div class="label">Absent</div>
+  </div>
+
+  <div class="box">
+    <div class="num" style="color:#9333ea;">${overallPercentage}%</div>
+    <div class="label">Attendance</div>
+  </div>
+
+  <div class="box">
+    <div class="num" style="color:#f59e0b;">${classesNeeded}</div>
+    <div class="label">Classes Needed for 85% Attendance</div>
+  </div>
+`;
   }
 </script>
 </body>
