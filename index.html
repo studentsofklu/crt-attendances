@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>CRT Attendance Portal</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Inter',sans-serif;
+}
+
+body{
+    background:#f4f5f7;
+    color:#111827;
+    min-height:100vh;
+    padding:25px 15px;
+}
+
+.container{
+    max-width:900px;
+    margin:auto;
+}
+
+.header{
+    text-align:center;
+    margin-bottom:25px;
+}
+
+.header h1{
+    font-size:28px;
+    margin-bottom:5px;
+}
+
+.header p{
+    color:#6b7280;
+    font-size:14px;
+}
+
+.card{
+    background:white;
+    border-radius:12px;
+    padding:20px;
+    margin-bottom:20px;
+    border:1px solid #e5e7eb;
+}
+
+.search-box{
+    display:flex;
+    gap:10px;
+}
+
+input{
+    flex:1;
+    padding:12px;
+    border:1px solid #d1d5db;
+    border-radius:8px;
+    font-size:15px;
+}
+
+button{
+    background:#111827;
+    color:white;
+    border:none;
+    border-radius:8px;
+    padding:12px 20px;
+    cursor:pointer;
+    font-size:14px;
+    font-weight:600;
+}
+
+button:hover{
+    background:#1f2937;
+}
+
+#error{
+    color:red;
+    margin-top:10px;
+    display:none;
+}
+
+#loading{
+    color:#2563eb;
+    margin-top:10px;
+}
+
+#result{
+    display:none;
+}
+
+.student-name{
+    font-size:24px;
+    font-weight:700;
+    margin-bottom:5px;
+}
+
+.student-reg{
+    color:#6b7280;
+    margin-bottom:20px;
+}
+
+.info-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+    gap:10px;
+}
+
+.info-box{
+    background:#f9fafb;
+    border:1px solid #e5e7eb;
+    border-radius:10px;
+    padding:12px;
+}
+
+.label{
+    font-size:11px;
+    color:#9ca3af;
+    text-transform:uppercase;
+    margin-bottom:5px;
+    font-weight:700;
+}
+
+.value{
+    font-size:15px;
+    font-weight:600;
+}
+
+.tabs{
+    display:flex;
+    gap:8px;
+    flex-wrap:wrap;
+    margin-top:20px;
+}
+
+.tab{
+    padding:8px 14px;
+    border-radius:8px;
+    border:1px solid #d1d5db;
+    background:white;
+    cursor:pointer;
+    font-size:13px;
+    font-weight:600;
+}
+
+.tab.active{
+    background:#111827;
+    color:white;
+}
+
+.slots{
+    margin-top:20px;
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(140px,1fr));
+    gap:10px;
+}
+
+.slot{
+    border-radius:10px;
+    padding:15px;
+    text-align:center;
+    border:1px solid;
+}
+
+.present{
+    background:#f0fdf4;
+    border-color:#bbf7d0;
+}
+
+.absent{
+    background:#fef2f2;
+    border-color:#fecaca;
+}
+
+.time{
+    font-size:12px;
+    color:#6b7280;
+    margin-bottom:8px;
+}
+
+.status{
+    font-size:22px;
+    font-weight:700;
+}
+
+.present .status{
+    color:#16a34a;
+}
+
+.absent .status{
+    color:#dc2626;
+}
+
+.word{
+    font-size:12px;
+    margin-top:5px;
+    font-weight:600;
+}
+
+.summary{
+    margin-top:20px;
+    display:flex;
+    gap:20px;
+    flex-wrap:wrap;
+}
+
+.sum-box{
+    flex:1;
+    min-width:120px;
+    background:#f9fafb;
+    border-radius:10px;
+    padding:15px;
+    text-align:center;
+    border:1px solid #e5e7eb;
+}
+
+.sum-num{
+    font-size:28px;
+    font-weight:700;
+}
+
+.green{
+    color:#16a34a;
+}
+
+.red{
+    color:#dc2626;
+}
+
+.blue{
+    color:#2563eb;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<div class="header">
+
+<h1>CRT Attendance Portal</h1>
+
+<p>Y23 CRT Summer Training Attendance</p>
+
+</div>
+
+<div class="card">
+
+<div class="search-box">
+
+<input
+type="text"
+id="regInput"
+placeholder="Enter REGD.NO">
+
+<button onclick="doSearch()">
+Search
+</button>
+
+</div>
+
+<div id="loading">
+Loading attendance data...
+</div>
+
+<div id="error">
+Student Not Found
+</div>
+
+</div>
+
+<div id="result">
+
+<div class="card">
+
+<div class="student-name" id="studentName"></div>
+
+<div class="student-reg" id="studentReg"></div>
+
+<div class="info-grid" id="infoGrid"></div>
+
+</div>
+
+<div class="card">
+
+<h3>Attendance</h3>
+
+<div class="tabs" id="tabs"></div>
+
+<div class="slots" id="slots"></div>
+
+<div class="summary" id="summary"></div>
+
+</div>
+
+</div>
+
+</div>
+
+<script>
+
+let DATA = [];
+
+fetch("data.json")
+
+.then(res => res.json())
+
+.then(data => {
+
+    DATA = data;
+
+    document.getElementById("loading")
+    .innerHTML = "Data Loaded Successfully";
+
+})
+
+.catch(err => {
+
+    document.getElementById("loading")
+    .innerHTML = "Error Loading Data";
+
+    console.log(err);
+
+});
+
+function doSearch(){
+
+    let regNo =
+    document.getElementById("regInput")
+    .value
+    .trim();
+
+    let student =
+    DATA.find(s => s["REGD.NO"] == regNo);
+
+    if(!student){
+
+        document.getElementById("error")
+        .style.display = "block";
+
+        document.getElementById("result")
+        .style.display = "none";
+
+        return;
+
+    }
+
+    document.getElementById("error")
+    .style.display = "none";
+
+    document.getElementById("result")
+    .style.display = "block";
+
+    document.getElementById("studentName")
+    .innerHTML = student.NAME;
+
+    document.getElementById("studentReg")
+    .innerHTML = student["REGD.NO"];
+
+    document.getElementById("infoGrid")
+    .innerHTML = `
+
+    <div class="info-box">
+      <div class="label">Branch</div>
+      <div class="value">${student.BRANCH}</div>
+    </div>
+
+    <div class="info-box">
+      <div class="label">CRT SEC</div>
+      <div class="value">${student["CRT SEC"]}</div>
+    </div>
+
+    <div class="info-box">
+      <div class="label">Room</div>
+      <div class="value">${student["CRT ROOM"]}</div>
+    </div>
+
+    `;
+
+    let dates =
+    Object.keys(student.dates);
+
+    let tabs =
+    document.getElementById("tabs");
+
+    tabs.innerHTML = "";
+
+    dates.forEach((date,index)=>{
+
+        tabs.innerHTML += `
+
+        <button
+        class="tab ${index==0?'active':''}"
+        onclick="showDate('${date}',this)">
+        ${date}
+        </button>
+
+        `;
+
+    });
+
+    window.currentStudent = student;
+
+    showDate(dates[0]);
+
+}
+
+function showDate(date,btn){
+
+    if(btn){
+
+        document
+        .querySelectorAll(".tab")
+        .forEach(t=>t.classList.remove("active"));
+
+        btn.classList.add("active");
+
+    }
+
+    let slots =
+    window.currentStudent.dates[date];
+
+    let slotsHTML = "";
+
+    let present = 0;
+    let absent = 0;
+
+    Object.entries(slots)
+    .forEach(([time,status])=>{
+
+        if(status=="P"){
+            present++;
+        }
+        else{
+            absent++;
+        }
+
+        slotsHTML += `
+
+        <div class="slot ${status=="P"?"present":"absent"}">
+
+        <div class="time">
+        ${time}
+        </div>
+
+        <div class="status">
+        ${status}
+        </div>
+
+        <div class="word">
+        ${status=="P"?"Present":"Absent"}
+        </div>
+
+        </div>
+
+        `;
+
+    });
+
+    document.getElementById("slots")
+    .innerHTML = slotsHTML;
+
+    let total =
+    present + absent;
+
+    let percentage =
+    ((present/total)*100).toFixed(1);
+
+    document.getElementById("summary")
+    .innerHTML = `
+
+    <div class="sum-box">
+
+    <div class="sum-num green">
+    ${present}
+    </div>
+
+    <div>Present</div>
+
+    </div>
+
+    <div class="sum-box">
+
+    <div class="sum-num red">
+    ${absent}
+    </div>
+
+    <div>Absent</div>
+
+    </div>
+
+    <div class="sum-box">
+
+    <div class="sum-num blue">
+    ${percentage}%
+    </div>
+
+    <div>Attendance</div>
+
+    </div>
+
+    `;
+
+}
+
+</script>
+
+</body>
+
+</html>
