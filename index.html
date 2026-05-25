@@ -26,6 +26,7 @@
     --blue-soft:#eff6ff;
     --amber:#d97706;
     --amber-soft:#fffbeb;
+    --teal:#0f766e;
     --shadow-sm:0 1px 2px rgba(15,23,42,.04), 0 1px 3px rgba(15,23,42,.06);
     --shadow-md:0 4px 14px rgba(15,23,42,.06), 0 2px 6px rgba(15,23,42,.04);
     --shadow-lg:0 20px 40px -20px rgba(37,99,235,.25), 0 10px 20px -10px rgba(15,23,42,.1);
@@ -748,7 +749,7 @@
     }
 
     // ── 1. Block right-click context menu ──────────────
-    
+
     // ── 2. Block keyboard shortcuts ────────────────────
     document.addEventListener('keydown', function (e) {
       var key = e.key || e.keyCode;
@@ -833,8 +834,7 @@
       }
     });
 
-
-        })();
+  })();
   // ══════════════════════════════════════════════════════
 
 
@@ -860,19 +860,19 @@
     return result;
   }
 
-const ALL_POSSIBLE_DATES = generateDateRange("11.05.2026", "04.07.2026");
+  const ALL_POSSIBLE_DATES = generateDateRange("11.05.2026", "31.05.2026");
 
   function updateDateRange() {
-  const availableDates = Object.keys(allData);
+    const availableDates = Object.keys(allData);
 
-  if (availableDates.length > 0) {
-    const firstDate = availableDates[0];
-    const lastDate = availableDates[availableDates.length - 1];
+    if (availableDates.length > 0) {
+      const firstDate = availableDates[0];
+      const lastDate = availableDates[availableDates.length - 1];
 
-    document.getElementById("dateRangeText").innerText =
-      `${firstDate} — ${lastDate}`;
+      document.getElementById("dateRangeText").innerText =
+        `${firstDate} — ${lastDate}`;
+    }
   }
-}
 
   function probeDate(dateStr) {
     const url =
@@ -886,16 +886,16 @@ const ALL_POSSIBLE_DATES = generateDateRange("11.05.2026", "04.07.2026");
       .catch(() => null);
   }
 
-Promise.all(ALL_POSSIBLE_DATES.map(d => probeDate(d)))
-  .then(results => {
-    ALL_POSSIBLE_DATES.forEach((dateStr, i) => {
-      if (results[i] !== null) {
-        allData[dateStr] = results[i].slice(2);
-      }
-    });
+  Promise.all(ALL_POSSIBLE_DATES.map(d => probeDate(d)))
+    .then(results => {
+      ALL_POSSIBLE_DATES.forEach((dateStr, i) => {
+        if (results[i] !== null) {
+          allData[dateStr] = results[i].slice(2);
+        }
+      });
 
-    updateDateRange();
-  });
+      updateDateRange();
+    });
 
   document.getElementById("regInput").addEventListener("input", function () {
     const regNo = this.value.trim();
@@ -1063,6 +1063,14 @@ Promise.all(ALL_POSSIBLE_DATES.map(d => probeDate(d)))
     const required          = Math.ceil((0.85 * overallTotal - overallPresent) / (1 - 0.85));
     const classesNeeded     = required > 0 ? required : 0;
 
+    // BUNK LOGIC
+    const bunkClasses =
+      overallPercentage >= 85
+        ? Math.floor(
+            (overallPresent - 0.85 * overallTotal) / 0.85
+          )
+        : 0;
+
     let infoStudent = student;
     if (!infoStudent || !infoStudent["__EMPTY"]) {
       Object.keys(allData).forEach(day => {
@@ -1122,6 +1130,10 @@ Promise.all(ALL_POSSIBLE_DATES.map(d => probeDate(d)))
       <div class="box">
         <div class="num" style="color:#f59e0b;">${classesNeeded}</div>
         <div class="label">Classes Needed for 85% Attendance</div>
+      </div>
+      <div class="box">
+        <div class="num" style="color:#0f766e;">${bunkClasses}</div>
+        <div class="label">Class Bunk</div>
       </div>`;
   }
 </script>
