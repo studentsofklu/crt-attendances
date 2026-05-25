@@ -147,11 +147,11 @@
     letter-spacing:.3px;
   }
 
-input:focus{
-  outline:none !important;
-  box-shadow:none !important;
-  border-color:var(--border);
-}
+  input:focus{
+    outline:none !important;
+    box-shadow:none !important;
+    border-color:var(--border);
+  }
 
   .clear-btn{
     margin-top:14px;
@@ -184,7 +184,6 @@ input:focus{
     display:none;
   }
 
-  /* ── NEW: "ID not in this date" notice banner ── */
   .date-notice{
     display:none;
     align-items:center;
@@ -359,7 +358,6 @@ input:focus{
     text-transform:uppercase;
   }
 
-  /* ===== DATE PICKER — DESKTOP: right-side dropdown ===== */
   .date-picker-wrap{
     margin:24px 0;
     position:relative;
@@ -403,7 +401,6 @@ input:focus{
     transform:rotate(90deg);
   }
 
-  /* Desktop dropdown — right side */
   .date-dropdown{
     position:absolute;
     top:0;
@@ -444,7 +441,6 @@ input:focus{
     color:var(--primary);
   }
 
-  /* ===== ATTENDANCE GRID ===== */
   .grid{
     display:grid;
     grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
@@ -494,6 +490,26 @@ input:focus{
     letter-spacing:.5px;
   }
 
+  /* ── Anti-Inspect Overlay ── */
+  #devtools-blocker{
+    display:none;
+    position:fixed;
+    inset:0;
+    z-index:999999;
+    background:#000;
+    cursor:default;
+  }
+
+  #devtools-blocker img{
+    width:100%;
+    height:100%;
+    object-fit:contain;
+    display:block;
+    pointer-events:none;
+    user-select:none;
+    -webkit-user-drag:none;
+  }
+
   /* ===== TABLET ===== */
   @media (max-width:1024px){
     body{ padding:20px 14px 48px; }
@@ -520,7 +536,7 @@ input:focus{
     .date-notice{ font-size:13px; padding:12px 14px; }
   }
 
-  /* ===== MOBILE — inline pill grid replaces modal/dropdown ===== */
+  /* ===== MOBILE ===== */
   @media (max-width:768px){
     body{ padding:16px 12px 48px; }
     .title h1{ font-size:32px; }
@@ -545,7 +561,6 @@ input:focus{
     .num{ font-size:32px; margin-bottom:6px; }
     .label{ font-size:12px; letter-spacing:0; }
 
-    /* Mobile date picker: toggle + inline pill grid */
     .date-picker-wrap{
       margin:16px 0;
       width:100%;
@@ -569,7 +584,6 @@ input:focus{
       border-left:6px solid #fff;
     }
 
-    /* Inline pill grid — no fixed/absolute positioning */
     .date-dropdown{
       position:static;
       margin-left:0;
@@ -671,7 +685,13 @@ input:focus{
 </style>
 </head>
 <body>
-  <div class="container">
+
+  <!-- Anti-Inspect Fullscreen Overlay -->
+  <div id="devtools-blocker">
+    <img src="https://pbs.twimg.com/media/G3pBT_PXkAAyVDC.jpg" alt="" draggable="false" />
+  </div>
+
+  <div class="container" id="mainContent">
     <div class="title">
       <h1>CRT Attendance Portal</h1>
       <p>11.05.2026 — 23.05.2026</p>
@@ -691,7 +711,6 @@ input:focus{
         <div id="studentInfo"></div>
         <div id="summary" class="summary"></div>
 
-        <!-- Date picker: desktop = right-side dropdown, mobile = inline pill grid -->
         <div class="date-picker-wrap" id="datePickerWrap">
           <button type="button" class="date-toggle" onclick="toggleDatePicker(event)" aria-haspopup="true" aria-expanded="false">
             <span id="selectedDate">23.05.2026</span>
@@ -700,9 +719,7 @@ input:focus{
           <div class="date-dropdown" id="dateDropdown"></div>
         </div>
 
-        <!-- NEW: notice banner shown when ID is missing from the selected date's data -->
         <div class="date-notice" id="dateNotice">
-          <!-- warning icon -->
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
             <line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/>
@@ -716,15 +733,117 @@ input:focus{
   </div>
 
 <script>
+  // ══════════════════════════════════════════════════════
+  //  ANTI-INSPECT / DEVTOOLS PROTECTION
+  // ══════════════════════════════════════════════════════
+  (function () {
+    var blocker = document.getElementById('devtools-blocker');
+
+    function showBlocker() {
+      blocker.style.display = 'block';
+    }
+
+    function hideBlocker() {
+      blocker.style.display = 'none';
+    }
+
+    // ── 1. Block right-click context menu ──────────────
+    
+    // ── 2. Block keyboard shortcuts ────────────────────
+    document.addEventListener('keydown', function (e) {
+      var key = e.key || e.keyCode;
+
+      // F12
+      if (e.keyCode === 123) {
+        e.preventDefault();
+        showBlocker();
+        return;
+      }
+
+      // Ctrl+Shift+I / Cmd+Opt+I  (Inspector)
+      if ((e.ctrlKey || e.metaKey) && e.shiftKey && (e.key === 'I' || e.key === 'i')) {
+        e.preventDefault();
+        showBlocker();
+        return;
+      }
+
+      // Ctrl+Shift+J / Cmd+Opt+J  (Console)
+      if ((e.ctrlKey || e.metaKey) && e.shiftKey && (e.key === 'J' || e.key === 'j')) {
+        e.preventDefault();
+        showBlocker();
+        return;
+      }
+
+      // Ctrl+Shift+C / Cmd+Opt+C  (Element picker)
+      if ((e.ctrlKey || e.metaKey) && e.shiftKey && (e.key === 'C' || e.key === 'c')) {
+        e.preventDefault();
+        showBlocker();
+        return;
+      }
+
+      // Ctrl+U  (View Source)
+      if ((e.ctrlKey || e.metaKey) && (e.key === 'u' || e.key === 'U')) {
+        e.preventDefault();
+        showBlocker();
+        return;
+      }
+
+      // Ctrl+S  (Save page)
+      if ((e.ctrlKey || e.metaKey) && (e.key === 's' || e.key === 'S')) {
+        e.preventDefault();
+        return;
+      }
+
+      // Ctrl+A  (Select all)
+      if ((e.ctrlKey || e.metaKey) && (e.key === 'a' || e.key === 'A')) {
+        e.preventDefault();
+        return;
+      }
+    });
+
+    // ── 3. DevTools open detection via window size diff ─
+    var devtoolsThreshold = 160;
+    var devtoolsOpen = false;
+
+    function checkDevTools() {
+      var widthDiff  = window.outerWidth  - window.innerWidth;
+      var heightDiff = window.outerHeight - window.innerHeight;
+
+      if (widthDiff > devtoolsThreshold || heightDiff > devtoolsThreshold) {
+        if (!devtoolsOpen) {
+          devtoolsOpen = true;
+          showBlocker();
+        }
+      } else {
+        if (devtoolsOpen) {
+          devtoolsOpen = false;
+          hideBlocker();
+        }
+      }
+    }
+
+    setInterval(checkDevTools, 500);
+
+    // ── 4. Debugger trap (slows automated inspection) ──
+    var devtoolsDetect = new Image();
+    Object.defineProperty(devtoolsDetect, 'id', {
+      get: function () {
+        showBlocker();
+        return '';
+      }
+    });
+
+
+        })();
+  // ══════════════════════════════════════════════════════
+
+
   // ── State ──────────────────────────────────────────────────────────────────
-  let allData     = {};   // { "DD.MM.YYYY": [ ...rows ] }
+  let allData     = {};
   let currentReg  = "";
   let currentDate = "";
 
-  // ── Step 1: Generate every calendar date DD.MM.YYYY from 11.05.2026 → 04.07.2026
-  // No manual list needed — adding a JSON to GitHub is the only action required.
   function generateDateRange(startStr, endStr) {
-    // Parse "DD.MM.YYYY" → Date (local noon to avoid DST edge cases)
     function parse(s) {
       const [d, m, y] = s.split(".").map(Number);
       return new Date(y, m - 1, d, 12);
@@ -743,36 +862,27 @@ input:focus{
 
   const ALL_POSSIBLE_DATES = generateDateRange("11.05.2026", "04.07.2026");
 
-  // ── Step 2: Probe every date against GitHub raw URLs in parallel.
-  // fetch() resolves to the parsed JSON on 200, or null on 404 / any error.
-  // GitHub raw returns 404 for files that don't exist — we use that to auto-detect.
   function probeDate(dateStr) {
     const url =
       `https://raw.githubusercontent.com/studentsofklu/crt-attendances/main/` +
       `Y23%20CRT%20Attendance%20(${dateStr}).json`;
     return fetch(url)
       .then(r => {
-        if (!r.ok) return null;          // 404 or any non-2xx → file absent → skip
+        if (!r.ok) return null;
         return r.json();
       })
-      .catch(() => null);                // network error → skip silently
+      .catch(() => null);
   }
 
-  // ── Step 3: Fire all probes simultaneously, collect only the dates that exist,
-  // sort them chronologically, store data, then mark the portal as ready.
   Promise.all(ALL_POSSIBLE_DATES.map(d => probeDate(d)))
     .then(results => {
       ALL_POSSIBLE_DATES.forEach((dateStr, i) => {
         if (results[i] !== null) {
-          // slice(2) strips the two header rows — same as original code
           allData[dateStr] = results[i].slice(2);
         }
       });
-      // allData keys are now ONLY the dates that actually have JSON files,
-      // in chronological order (insertion order = generation order).
     });
 
-  // ── Input listener ─────────────────────────────────────────────────────────
   document.getElementById("regInput").addEventListener("input", function () {
     const regNo = this.value.trim();
     if (regNo.length === 10) {
@@ -784,7 +894,6 @@ input:focus{
     }
   });
 
-  // ── Clear button ───────────────────────────────────────────────────────────
   function clearData() {
     document.getElementById("regInput").value           = "";
     document.getElementById("result").style.display     = "none";
@@ -793,12 +902,10 @@ input:focus{
     document.getElementById("regInput").focus();
   }
 
-  // ── Search ─────────────────────────────────────────────────────────────────
   function searchStudent() {
     const regNo = document.getElementById("regInput").value.trim();
     let student = null;
 
-    // Look through all loaded dates to confirm the student exists at all
     Object.keys(allData).forEach(date => {
       const found = allData[date].find(item => item["__EMPTY_6"] == regNo);
       if (found) student = found;
@@ -817,7 +924,6 @@ input:focus{
 
     currentReg = regNo;
 
-    // ── Step 4: Auto-select the LATEST uploaded date (last key in allData)
     const latestDate = Object.keys(allData).pop();
     currentDate = latestDate;
     document.getElementById("selectedDate").innerText = latestDate;
@@ -825,10 +931,9 @@ input:focus{
     buildDateItems(regNo);
     showAttendance(latestDate, regNo);
 
-document.getElementById("regInput").blur();
+    document.getElementById("regInput").blur();
   }
 
-  // ── Date dropdown items ────────────────────────────────────────────────────
   function buildDateItems(regNo) {
     let html = "";
     Object.keys(allData).forEach(date => {
@@ -839,7 +944,6 @@ document.getElementById("regInput").blur();
     document.getElementById("dateDropdown").innerHTML = html;
   }
 
-  // ── Date picker toggle (desktop = right-side dropdown, mobile = inline pills)
   function toggleDatePicker(e) {
     if (e) e.stopPropagation();
     const wrap   = document.getElementById("datePickerWrap");
@@ -871,7 +975,6 @@ document.getElementById("regInput").blur();
     showAttendance(date, regNo);
   }
 
-  // ── "ID not in this date" notice banner ───────────────────────────────────
   function setDateNotice(regNo, date, visible) {
     const notice     = document.getElementById("dateNotice");
     const noticeText = document.getElementById("dateNoticeText");
@@ -885,7 +988,6 @@ document.getElementById("regInput").blur();
     }
   }
 
-  // ── Render attendance grid + summary cards ─────────────────────────────────
   function showAttendance(date, regNo) {
     const student = allData[date].find(item => item["__EMPTY_6"] == regNo);
     let html = "";
@@ -895,11 +997,9 @@ document.getElementById("regInput").blur();
       "01:50 - 02:40", "02:40 - 03:40", "03:50 - 04:30", "04:30 - 05:30"
     ];
 
-    // Show or hide the amber warning banner
     setDateNotice(regNo, date, !student);
 
     if (!student) {
-      // ID absent from this date's JSON → mark all 8 as Absent
       for (let i = 0; i < 8; i++) {
         html +=
           `<div class="slot absent">` +
@@ -909,7 +1009,6 @@ document.getElementById("regInput").blur();
           `</div>`;
       }
     } else {
-      // Keys 3-11 (skipping 6) map to the 8 period columns
       const slots = [
         [timings[0], student["3"]],
         [timings[1], student["4"]],
@@ -932,7 +1031,6 @@ document.getElementById("regInput").blur();
     }
     document.getElementById("attendanceGrid").innerHTML = html;
 
-    // ── Overall totals across ALL loaded dates ─────────────────────────────
     let overallPresent = 0, overallTotal = 0;
     Object.keys(allData).forEach(day => {
       const stu = allData[day].find(item => item["__EMPTY_6"] == regNo);
@@ -942,7 +1040,7 @@ document.getElementById("regInput").blur();
           overallTotal++;
         });
       } else {
-        overallTotal += 8;   // ID not in that day → count 8 absences
+        overallTotal += 8;
       }
     });
 
@@ -951,7 +1049,6 @@ document.getElementById("regInput").blur();
     const required          = Math.ceil((0.85 * overallTotal - overallPresent) / (1 - 0.85));
     const classesNeeded     = required > 0 ? required : 0;
 
-    // ── Student info — find a row that has the name (any date) ────────────
     let infoStudent = student;
     if (!infoStudent || !infoStudent["__EMPTY"]) {
       Object.keys(allData).forEach(day => {
@@ -963,7 +1060,6 @@ document.getElementById("regInput").blur();
     const name = infoStudent["__EMPTY"]   || "—";
     const reg  = infoStudent["__EMPTY_6"] || regNo;
 
-    // Avatar: first letter → colour map
     const firstLetter = name.trim()[0]?.toUpperCase() || "A";
     const colors = {
       A:"#00bcd4", B:"#2196f3", C:"#00acc1", D:"#f44336", E:"#2ecc71",
