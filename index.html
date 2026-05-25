@@ -694,7 +694,7 @@
   <div class="container" id="mainContent">
     <div class="title">
       <h1>CRT Attendance Portal</h1>
-      <p>11.05.2026 — 23.05.2026</p>
+      <p id="dateRangeText"></p>
     </div>
 
     <div class="card">
@@ -860,7 +860,19 @@
     return result;
   }
 
-  const ALL_POSSIBLE_DATES = generateDateRange("11.05.2026", "04.07.2026");
+const ALL_POSSIBLE_DATES = generateDateRange("11.05.2026", "04.07.2026");
+
+  function updateDateRange() {
+  const availableDates = Object.keys(allData);
+
+  if (availableDates.length > 0) {
+    const firstDate = availableDates[0];
+    const lastDate = availableDates[availableDates.length - 1];
+
+    document.getElementById("dateRangeText").innerText =
+      `${firstDate} — ${lastDate}`;
+  }
+}
 
   function probeDate(dateStr) {
     const url =
@@ -874,14 +886,16 @@
       .catch(() => null);
   }
 
-  Promise.all(ALL_POSSIBLE_DATES.map(d => probeDate(d)))
-    .then(results => {
-      ALL_POSSIBLE_DATES.forEach((dateStr, i) => {
-        if (results[i] !== null) {
-          allData[dateStr] = results[i].slice(2);
-        }
-      });
+Promise.all(ALL_POSSIBLE_DATES.map(d => probeDate(d)))
+  .then(results => {
+    ALL_POSSIBLE_DATES.forEach((dateStr, i) => {
+      if (results[i] !== null) {
+        allData[dateStr] = results[i].slice(2);
+      }
     });
+
+    updateDateRange();
+  });
 
   document.getElementById("regInput").addEventListener("input", function () {
     const regNo = this.value.trim();
